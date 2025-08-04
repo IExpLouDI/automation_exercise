@@ -1,0 +1,29 @@
+[project]
+name = "ozon"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Viacheslav Suchkov",email = "iexploudi@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "pytest (>=8.4.1,<9.0.0)",
+    "allure-pytest (>=2.15.0,<3.0.0)",
+    "requests (>=2.32.4,<3.0.0)",
+    "selene (==2.0.0rc9)",
+    "python-dotenv (>=1.1.1,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "ozon", from = "src"}]
+
+[tool.pytest.ini_options]
+addopts = [
+    '--alluredir=allure-results',
+    '--clean-alluredir'
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
