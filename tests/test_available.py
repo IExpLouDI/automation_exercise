@@ -33,5 +33,5 @@ def test_available():
     )
     browser.config.driver = driver
 
-    browser.open('https://www.ozon.ru')
-    browser.element("[alt='Ozon']").should(be.present)
+    browser.open('https://www.automationexercise.com/test_cases')
+    browser.element("h2.title").should(be.present)
