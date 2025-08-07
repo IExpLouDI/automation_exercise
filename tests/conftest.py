@@ -6,13 +6,10 @@ from dotenv import load_dotenv
 import os
 
 
-@pytest.fixture(autouse=True)
-def load_env():
+@pytest.fixture()
+def setup_remote_browser():
     load_dotenv()
 
-
-@pytest.fixture(scope='session', autouse=True)
-def setup_browser():
     SELENOID_LOGIN = os.getenv('SELENOID_LOGIN')
     SELENOID_PASSWORD = os.getenv('SELENOID_PASSWORD')
     SELENOID_HOST = os.getenv('SELENOID_HOST')
@@ -26,7 +23,7 @@ def setup_browser():
     }
     options.add_argument("--start-maximized")
     options.add_argument("--disable-blink-features=AutomationControlled")
-    # options.page_load_strategy = "eager"
+    options.page_load_strategy = "eager"
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
 
@@ -37,5 +34,22 @@ def setup_browser():
         options=options,
     )
     browser.config.driver = driver
+    # --disable -features = omit-cors-client -cert
+    # options.add_argument('--disable-features=OmitCorsClientCert')
+    # browser.config.driver_options = options
 
-    browser.open('https://www.automationexercise.com')
+    browser.config.base_url = 'https://www.automationexercise.com'
+
+    yield browser
+
+    browser.quit()
+
+
+@pytest.fixture()
+def setup_browser():
+    browser.config.driver_name = 'firefox'
+    browser.config.base_url = 'https://www.automationexercise.com'
+
+    yield browser
+
+    browser.quit()
