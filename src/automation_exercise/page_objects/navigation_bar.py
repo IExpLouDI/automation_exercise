@@ -2,7 +2,7 @@ import allure
 from selene import browser
 
 
-class MainHeaderPage:
+class NavigationBar:
     def __init__(self):
         self.search_bar = browser.element("[action='/search'] input")
 

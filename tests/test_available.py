@@ -1,4 +1,4 @@
-from selene import browser, be
+from selene import browser, be, have
 
 
 def test_available():
@@ -20,6 +20,7 @@ def test_case_1(setup_browser):
     browser.element('h2.title').should(be.visible)
 
     browser.element('#id_gender2').click()
+    browser.element("[data-qa='password']").type('Qwe123')
 
     browser.execute_script("window.scrollBy(0, 300);")
 
@@ -35,4 +36,37 @@ def test_case_1(setup_browser):
     browser.element('#uniform-newsletter input').click()
     browser.element('#optin').click()
 
+    browser.execute_script("window.scrollBy(0, 300);")
 
+    browser.element("[data-qa='first_name']").type('Frederick')
+    browser.element("[data-qa='last_name']").type('Hommers')
+    browser.element("[data-qa='company']").type('Testersvallers')
+
+    browser.execute_script("window.scrollBy(0, 300);")
+
+    browser.element("[data-qa='address']").type('Testersvallers')
+    browser.element("[data-qa='address2']").type('Testersvallers')
+
+    browser.execute_script("window.scrollBy(0, 300);")
+
+    browser.element("[data-qa='country']").click()
+    browser.element("option[value='India']").click()
+
+    browser.element("[data-qa='state']").type('Alasksa')
+    browser.element("[data-qa='city']").type('Alasksa')
+    browser.element("[data-qa='mobile_number']").type('2333221')
+
+    browser.execute_script("window.scrollBy(0, 300);")
+
+    browser.element("[data-qa='create-account']").click()
+
+    browser.element("[data-qa='account-created']").should(be.visible)
+
+    browser.element("[data-qa='continue-button']").click()
+
+    browser.element().should(have.text(f' Logged in as {"T1"}'))
+
+    browser.element("//a[text()=' Delete Account']").click()
+    browser.element("[data-qa='account-deleted']").should(be.visible)
+
+    browser.element("[data-qa='continue-button']").click()
