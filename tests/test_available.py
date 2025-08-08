@@ -7,7 +7,7 @@ def test_available():
     browser.element("h2.title").should(be.present)
 
 def test_case_1(setup_browser):
-    browser.open('/')
+    browser.open('https://www.automationexercise.com')
     browser.element("[alt='Website for automation practice']").should(be.visible)
 
     browser.element("//a[text()=' Signup / Login']").click()
@@ -47,16 +47,17 @@ def test_case_1(setup_browser):
     browser.element("[data-qa='address']").type('Testersvallers')
     browser.element("[data-qa='address2']").type('Testersvallers')
 
-    browser.execute_script("window.scrollBy(0, 300);")
+    browser.execute_script("window.scrollBy(0, 100);")
 
     browser.element("[data-qa='country']").click()
     browser.element("option[value='India']").click()
 
     browser.element("[data-qa='state']").type('Alasksa')
     browser.element("[data-qa='city']").type('Alasksa')
+    browser.element("[data-qa='zipcode']").type('2333221')
     browser.element("[data-qa='mobile_number']").type('2333221')
 
-    browser.execute_script("window.scrollBy(0, 300);")
+    browser.execute_script("window.scrollBy(0, 200);")
 
     browser.element("[data-qa='create-account']").click()
 
@@ -64,7 +65,7 @@ def test_case_1(setup_browser):
 
     browser.element("[data-qa='continue-button']").click()
 
-    browser.element().should(have.text(f' Logged in as {"T1"}'))
+    browser.element("//a[contains(text(), 'Logged')]").should(have.text(f'Logged in as {"Name"}'))
 
     browser.element("//a[text()=' Delete Account']").click()
     browser.element("[data-qa='account-deleted']").should(be.visible)
