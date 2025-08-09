@@ -48,7 +48,7 @@ class UserAccountPage:
 
     def enter_password(self, value):
         with allure.step(f'Устанавливаем пароль - {value}'):
-            self.email.type(value)
+            self.password.type(value)
 
         return self
 
