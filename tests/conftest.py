@@ -52,6 +52,8 @@ def setup_browser():
     # browser.config.base_url = 'https://www.automationexercise.com'
     # opt = options.page_load_strategy = "eager"
     # browser.config.driver_options = opt
+    browser.open('https://www.automationexercise.com')
+
     yield browser
 
     browser.quit()
