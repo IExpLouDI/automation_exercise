@@ -1,5 +1,5 @@
 import allure
-from selene import browser
+from selene import browser, be
 
 
 class SignUpLoginPage:
@@ -39,3 +39,7 @@ class SignUpLoginPage:
     def pres_button_login(self, value, is_login=False):
         with allure.step(f'Нажимаем кнопку Login'):
             self.button_login.click()
+
+    @staticmethod
+    def check_signup_and_login_page_is_open() -> None:
+        browser.element("//h2[text()='New User Signup!']").should(be.visible)

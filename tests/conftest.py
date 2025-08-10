@@ -1,3 +1,5 @@
+import random
+
 import pytest
 from selene import browser
 from selenium.webdriver.chrome import options
@@ -6,8 +8,11 @@ from selenium import webdriver
 from dotenv import load_dotenv
 import os
 
+from automation_exercise.utils.static_values import Country, Months
+from automation_exercise.data.user import User
 
-# @pytest.fixture()
+
+# @pytest.fixture(autouse=False)
 # def setup_remote_browser():
 #     load_dotenv()
 #
@@ -57,3 +62,27 @@ def setup_browser():
     yield browser
 
     browser.quit()
+
+@pytest.fixture()
+def create_user():
+    user = User(
+        nick_name='T1',
+        email='T2@test.com',
+        password='Qwe123',
+        company_name='T2',
+        country=Country.india.value,
+        first_name='T3',
+        last_name='T4',
+        gender='male',
+        day='10',
+        month=Months.may.value[0],
+        year='2000',
+        city='Bangladesh',
+        state='Salavalas',
+        first_address='Shampte 32 str., appartment 33',
+        second_address='Helentors 5 str., apartment 44',
+        zipcode='2331144',
+        mobile_number='34534222323'
+    )
+
+    return user

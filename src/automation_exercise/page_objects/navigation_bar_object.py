@@ -1,5 +1,5 @@
 import allure
-from selene import browser
+from selene import browser, have
 
 
 class NavigationBar:
@@ -29,8 +29,8 @@ class NavigationBar:
 
     def click_delete_user(self):
         with allure.step('Удаляем пользователя'):
-            self.cart.click()
+            self.delete.click()
 
-    def search_position(self, value):
-        with allure.step(f'Find {value}'):
-            self.search_bar.type(value).press_enter()
+    @staticmethod
+    def user_is_login(nickname):
+        browser.element("//a[contains(text(), 'Logged')]").should(have.text(f'Logged in as {nickname}'))

@@ -1,5 +1,5 @@
 import allure
-from selene import browser
+from selene import browser, be
 
 
 class UserAccountPage:
@@ -25,6 +25,7 @@ class UserAccountPage:
         self.zipcode = browser.element("[data-qa='zipcode']")
         self.mobile_number = browser.element("[data-qa='mobile_number']")
         self.button_create_account = browser.element("[data-qa='create-account']")
+
 
     def set_gender(self, value:str):
         with allure.step(f'Устанавливаем пол пользователя - {value}'):
@@ -147,23 +148,5 @@ class UserAccountPage:
 
         return self
 
-    # browser.execute_script("window.scrollBy(0, 300);")
-    #
-    # browser.execute_script("window.scrollBy(0, 300);")
-    #
-    # browser.execute_script("window.scrollBy(0, 300);")
-    #
-    # browser.execute_script("window.scrollBy(0, 100);")
-    #
-    # browser.element("[data-qa='state']").type('Alasksa')
-    # browser.element("[data-qa='city']").type('Alasksa')
-    # browser.element("[data-qa='zipcode']").type('2333221')
-    # browser.element("[data-qa='mobile_number']").type('2333221')
-    #
-    # browser.execute_script("window.scrollBy(0, 200);")
-    #
-    # browser.element("[data-qa='create-account']").click()
-    #
-    # browser.element("[data-qa='account-created']").should(be.visible)
-    #
-    # browser.element("[data-qa='continue-button']").click()
+    def should_user_account_page_is_open(self):
+        browser.element('h2.title').should(be.visible)
