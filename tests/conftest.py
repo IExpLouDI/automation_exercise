@@ -8,8 +8,8 @@ from selenium import webdriver
 from dotenv import load_dotenv
 import os
 
-from automation_exercise.utils.static_values import Country, Months
-from automation_exercise.data.user import User
+from src.automation_exercise.utils.static_values import Country, Months
+from src.automation_exercise.data.user import User
 
 from src.automation_exercise.API.post_request import post_create_account
 

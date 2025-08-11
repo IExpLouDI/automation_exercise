@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from automation_exercise.utils.static_values import Country, Months
+from src.automation_exercise.utils.static_values import Country, Months
 
 
 @dataclass

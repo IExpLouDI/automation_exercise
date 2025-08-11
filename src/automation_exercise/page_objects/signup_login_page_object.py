@@ -17,9 +17,9 @@ class SignUpLoginPage:
 
         return self
 
-    def type_login(self, value):
+    def type_password(self, value):
         with allure.step(f'Вводим пароль - {value}'):
-            self.sign_name.type(value)
+            self.login_password.type(value)
 
         return self
 

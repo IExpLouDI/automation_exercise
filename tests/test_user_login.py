@@ -10,4 +10,5 @@ def test_user_login(setup_browser, create_account):
     app.navigation_bar.open_login_page()
     app.signup_login_page.check_signup_and_login_page_is_open()
 
-    app.signup_login_page.login_email()
+    app.signup_login_page.type_email(create_account['email'], is_login=True)
+    app.signup_login_page.type_password(create_account['password'])
