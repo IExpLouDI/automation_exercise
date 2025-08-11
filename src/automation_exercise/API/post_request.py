@@ -33,6 +33,14 @@ def post_create_account(user_info:User):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 201:
-        return {'email': user_info.email, 'password': user_info.password, 'status': 'create'}
+        return {'email': user_info.email,
+                'password': user_info.password,
+                'nick_name': user_info.nick_name,
+                'status': 'create'
+                }
 
-    return {'email': user_info.email, 'password': user_info.password, 'status': 'exists'}
+    return {'email': user_info.email,
+            'password': user_info.password,
+            'nick_name': user_info.nick_name,
+            'status': 'exists'
+            }

@@ -33,11 +33,11 @@ class SignUpLoginPage:
         return self
 
     def pres_button_signup(self):
-        with allure.step(f'Нажимаем кнопку Signup'):
+        with allure.step('Нажимаем кнопку Signup'):
             self.button_signup.click()
 
-    def pres_button_login(self, value, is_login=False):
-        with allure.step(f'Нажимаем кнопку Login'):
+    def pres_button_login(self):
+        with allure.step('Нажимаем кнопку Login'):
             self.button_login.click()
 
     @staticmethod

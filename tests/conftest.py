@@ -8,6 +8,7 @@ from selenium import webdriver
 from dotenv import load_dotenv
 import os
 
+from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User
 
@@ -91,4 +92,5 @@ def create_user():
 
 @pytest.fixture()
 def create_account(create_user):
-    return post_create_account(create_user)
+    yield post_create_account(create_user)
+    # delete_account(create_user.email, create_user.password)

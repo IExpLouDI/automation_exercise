@@ -9,6 +9,7 @@ class NavigationBar:
         self.products = browser.element("//a[contains(text(), 'Products')]")
         self.cart = browser.element("//a[contains(text(), 'Cart')]")
         self.login = browser.element("//a[contains(text(), 'Login')]")
+        self.logout = browser.element("//a[contains(text(), 'Logout')]")
         self.delete = browser.element("//a[contains(text(), 'Delete')]")
 
     def open_home_page(self):
@@ -30,6 +31,10 @@ class NavigationBar:
     def click_delete_user(self):
         with allure.step('Удаляем пользователя'):
             self.delete.click()
+
+    def click_logout(self):
+        with allure.step('Нажимаем Logout'):
+            self.logout.click()
 
     @staticmethod
     def check_user_is_login(nickname):
