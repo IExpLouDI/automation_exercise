@@ -11,6 +11,7 @@ class NavigationBar:
         self.login = browser.element("//a[contains(text(), 'Login')]")
         self.logout = browser.element("//a[contains(text(), 'Logout')]")
         self.delete = browser.element("//a[contains(text(), 'Delete')]")
+        self.contact_us = browser.element("//a[contains(text(), 'Contact us')]")
 
     def open_home_page(self):
         with allure.step('Открываем домашнюю страницу'):
@@ -27,6 +28,10 @@ class NavigationBar:
     def open_login_page(self):
         with allure.step('Открываем окно входа и регистрации пользователя'):
             self.login.click()
+
+    def open_contact_us_page(self):
+        with allure.step('Открываем окно обратной связи'):
+            self.contact_us.click()
 
     def click_delete_user(self):
         with allure.step('Удаляем пользователя'):
