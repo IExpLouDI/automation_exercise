@@ -1,35 +1,33 @@
 import allure
-from selene import browser, be
 
 from src.automation_exercise.app import Application
 from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_create
 from src.automation_exercise.utils.check_functions import check_account_is_deleted
 
 
-def test_user_registration(setup_browser, create_user):
-    app = Application()
+def test_user_registration(setup_browser, create_user, application):
 
     check_website_is_open()
 
-    with allure.step('Нажимаем в навигации на форму регистрации/входа'):
-        app.navigation_bar.open_login_page()
+    with allure.step('Открываем форму авторизации/регистрации'):
+        application.navigation_bar.open_login_page()
 
     with allure.step('Проверяем открытие формы регистрации/входа'):
-        app.signup_login_page.check_signup_and_login_page_is_open()
+        application.signup_login_page.check_signup_and_login_page_is_open()
         # browser.element("//h2[text()='New User Signup!']").should(be.visible)
 
     with allure.step('Регистрируем пользователя'):
-        (app.signup_login_page
+        (application.signup_login_page
          .type_sign_up_name(create_user.nick_name)
          .type_email(create_user.email)
          .pres_button_signup()
          )
 
-    with allure.step('Проверяем открытие формы с данными пользователя'):
-        app.user_account_page.should_user_account_page_is_open()
+    with allure.step('Проверяем открытие формы ввода данных пользователя'):
+        application.user_account_page.should_user_account_page_is_open()
 
     with (allure.step('Заполняем данные пользователя')):
-        (app.user_account_page
+        (application.user_account_page
          .set_gender(create_user.gender)
          .enter_password(create_user.password)
          .scroll_page(300)
@@ -55,12 +53,28 @@ def test_user_registration(setup_browser, create_user):
          .press_button_create_account()
          )
 
-    with allure.step('Проверяем форму успешного создания пользователя'):
+    with allure.step('Проверяем появление окна успешного создания пользователя'):
         check_account_is_create()
 
     with allure.step('Проверяем, что пользователь залогинен после создания'):
-        app.navigation_bar.check_user_is_login(create_user.nick_name)
+        application.navigation_bar.check_user_is_login(create_user.nick_name)
 
     with allure.step('Удаляем созданного пользователя'):
-        app.navigation_bar.click_delete_user()
+        application.navigation_bar.click_delete_user()
         check_account_is_deleted()
+
+
+def test_registration_user_with_existing_email(setup_browser, create_user, create_account, application):
+
+    with allure.step('Открываем форму авторизации/регистрации'):
+        application.navigation_bar.open_login_page()
+
+    with allure.step('Вводим в форму регистрации данные существующего пользователя'):
+        (application.signup_login_page
+         .type_sign_up_name(create_user.nick_name)
+         .type_email(create_user.email)
+         .pres_button_signup()
+         )
+
+    with allure.step('Проверяем появление ошибки'):
+        application.signup_login_page.verify_enter_existing_email()

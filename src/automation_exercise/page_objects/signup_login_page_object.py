@@ -10,6 +10,8 @@ class SignUpLoginPage:
         self.login_password = browser.element("[data-qa='login-password']")
         self.button_signup = browser.element("[data-qa='signup-button']")
         self.button_login = browser.element("[data-qa='login-button']")
+        self.error_login = browser.element("form[action='/signup'] p")
+        self.error_signup = browser.element("form[action='/signup'] p")
 
     def type_sign_up_name(self, value):
         with allure.step(f'Вводим имя пользователя {value}'):
@@ -40,12 +42,18 @@ class SignUpLoginPage:
         with allure.step('Нажимаем кнопку Login'):
             self.button_login.click()
 
-    @staticmethod
-    def verify_incorrect_email_pass():
+
+    def verify_incorrect_email_pass(self):
         with allure.step('Проверяем появление ошибки входа'):
-            browser.element("form[action='/login'] p").should(be.visible)
+            self.error_login.should(be.visible)
         with allure.step('Проверяем, что текст ошибки - Your email or password is incorrect!'):
-            browser.element("form[action='/login'] p").should(have.exact_text('Your email or password is incorrect!'))
+            self.error_login.should(have.exact_text('Your email or password is incorrect!'))
+
+    def verify_enter_existing_email(self):
+        with allure.step('Проверяем появление ошибки ввода email'):
+            self.error_signup.should(be.visible)
+        with allure.step('Проверяем, что текст ошибки - Email Address already exist!'):
+            self.error_signup.should(have.exact_text('Email Address already exist!'))
 
     @staticmethod
     def check_signup_and_login_page_is_open(is_login=False) -> None:
