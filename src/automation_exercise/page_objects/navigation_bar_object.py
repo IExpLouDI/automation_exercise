@@ -32,5 +32,5 @@ class NavigationBar:
             self.delete.click()
 
     @staticmethod
-    def user_is_login(nickname):
+    def check_user_is_login(nickname):
         browser.element("//a[contains(text(), 'Logged')]").should(have.text(f'Logged in as {nickname}'))

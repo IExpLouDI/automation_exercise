@@ -63,7 +63,7 @@ def test_case_1(setup_browser, create_user):
         check_account_is_create()
 
     with allure.step('Проверяем, что пользователь залогинен после создания'):
-        app.navigation_bar.user_is_login(create_user.nick_name)
+        app.navigation_bar.check_user_is_login(create_user.nick_name)
 
     with allure.step('Удаляем созданного пользователя'):
         app.navigation_bar.click_delete_user()
