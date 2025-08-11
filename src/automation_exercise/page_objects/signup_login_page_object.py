@@ -1,5 +1,5 @@
 import allure
-from selene import browser, be
+from selene import browser, be, have
 
 
 class SignUpLoginPage:
@@ -41,5 +41,15 @@ class SignUpLoginPage:
             self.button_login.click()
 
     @staticmethod
-    def check_signup_and_login_page_is_open() -> None:
-        browser.element("//h2[text()='New User Signup!']").should(be.visible)
+    def verify_incorrect_email_pass():
+        with allure.step('Проверяем появление ошибки входа'):
+            browser.element("form[action='/login'] p").should(be.visible)
+        with allure.step('Проверяем, что текст ошибки - Your email or password is incorrect!'):
+            browser.element("form[action='/login'] p").should(have.exact_text('Your email or password is incorrect!'))
+
+    @staticmethod
+    def check_signup_and_login_page_is_open(is_login=False) -> None:
+        if not is_login:
+            browser.element("//h2[text()='New User Signup!']").should(be.visible)
+        else:
+            browser.element("//h2[text()='Login to your account']").should(be.visible)

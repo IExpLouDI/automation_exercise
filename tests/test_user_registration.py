@@ -1,16 +1,12 @@
 import allure
 from selene import browser, be
 
-from automation_exercise.app import Application
-from automation_exercise.utils.check_functions import check_website_is_open, check_account_is_create, check_account_is_deleted
+from src.automation_exercise.app import Application
+from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_create
+from src.automation_exercise.utils.check_functions import check_account_is_deleted
 
 
-def test_available():
-    # setTimeout(function() {debugger;}, 5000)
-    browser.open('https://www.automationexercise.com')
-    browser.element("h2.title").should(be.present)
-
-def test_case_1(setup_browser, create_user):
+def test_user_registration(setup_browser, create_user):
     app = Application()
 
     check_website_is_open()

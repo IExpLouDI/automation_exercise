@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import os
 
 from src.automation_exercise.API.delete_request import delete_account
+from src.automation_exercise.app import Application
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User
 
@@ -52,6 +53,10 @@ from src.automation_exercise.API.post_request import post_create_account
 #     yield browser
 #
 #     browser.quit()
+@pytest.fixture()
+def application():
+    app = Application()
+    return app
 
 
 @pytest.fixture()
@@ -65,6 +70,7 @@ def setup_browser():
     yield browser
 
     browser.quit()
+
 
 @pytest.fixture()
 def create_user():
@@ -90,7 +96,8 @@ def create_user():
 
     return user
 
+
 @pytest.fixture()
 def create_account(create_user):
     yield post_create_account(create_user)
-    # delete_account(create_user.email, create_user.password)
+    delete_account(create_user.email, create_user.password)
