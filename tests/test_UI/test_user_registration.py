@@ -1,6 +1,5 @@
 import allure
 
-from src.automation_exercise.app import Application
 from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_create
 from src.automation_exercise.utils.check_functions import check_account_is_deleted
 

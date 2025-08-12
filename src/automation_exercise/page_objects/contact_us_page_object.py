@@ -1,6 +1,6 @@
 import os.path
 
-from selene import browser, be
+from selene import browser, be, have
 from allure import step
 
 
@@ -51,3 +51,17 @@ class ContactUsPage:
 
     def verify_page_is_open(self):
         self.page_name.should(be.present)
+
+    def confirm_alert(self):
+        with step('Выполняем подтверждение в всплывающем окне'):
+            browser.switch_to.alert.accept()
+
+        return self
+
+    def verify_successful_submited(self):
+        with step('Проверяем, что появилось сообщения успешной отправки'):
+            browser.element('.status').should(be.present)
+        with step('Проверяем, что текст сообщения - Success! Your details have been submitted successfully'):
+            browser.element('.status').should(have.exact_text('Success! Your details have been submitted successfully.'))
+        with step('Возвращаемся на домашнюю страницу'):
+            browser.element('.btn-success').click()
