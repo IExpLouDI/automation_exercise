@@ -18,7 +18,7 @@ class ProductsPage:
             self.scroll_up.click()
 
     def scroll_products_page(self, scroll_step:int):
-        browser.execute_script(f"window.scrollBy(0, {step});")
+        browser.execute_script(f"window.scrollBy(0, {scroll_step});")
 
         return self
 
