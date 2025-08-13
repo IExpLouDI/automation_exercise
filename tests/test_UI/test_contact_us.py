@@ -1,5 +1,9 @@
+import os.path
+
 from src.automation_exercise.utils.check_functions import check_website_is_open
 from allure import step
+
+from src.automation_exercise.utils.paths import images_dir
 
 
 def test_contact_us_form(setup_browser, application, create_account):
@@ -15,7 +19,7 @@ def test_contact_us_form(setup_browser, application, create_account):
          .type_user_email(create_account['email'])
          .type_mail_subject('Test')
          .type_message('lorem')
-         .upload_user_file('/Users/vssuchkov/PycharmProjects/automation_exercise/resources/images/cat.jpeg')
+         .upload_user_file(os.path.join(images_dir,'cat.jpeg'))
          .press_submit_button()
          )
 
