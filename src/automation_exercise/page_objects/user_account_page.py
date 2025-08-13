@@ -6,6 +6,7 @@ from src.automation_exercise.page_objects.stable_pages_object import StableObjec
 
 class UserAccountPage(StableObject):
     def __init__(self):
+        super().__init__()
         self.male_gender = browser.element('#id_gender1')
         self.female_gender = browser.element('#id_gender2')
         self.nick_name = browser.element("[data-qa='name']")
