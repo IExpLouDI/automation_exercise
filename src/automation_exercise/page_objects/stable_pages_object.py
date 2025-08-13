@@ -1,5 +1,5 @@
 from allure import step
-from selene import browser
+from selene import browser, be
 
 
 class StableObject:
@@ -12,5 +12,11 @@ class StableObject:
 
 	def scroll_page(self, scroll_step: int):
 		browser.execute_script(f"window.scrollBy(0, {scroll_step});")
+
+		return self
+
+	def scroll_down_to_footer(self):
+		with step('Выполняем прокрутку до появления элемента footer'):
+			browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 		return self

@@ -12,4 +12,3 @@ def test_search_product(setup_browser, application):
 	application.products.search_product('Tshirt')
 	application.products.verify_searched_products_is_visible()
 	application.products.verify_all_the_products_is_visible()
-	pass
