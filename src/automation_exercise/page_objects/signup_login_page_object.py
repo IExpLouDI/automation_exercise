@@ -42,7 +42,6 @@ class SignUpLoginPage:
         with allure.step('Нажимаем кнопку Login'):
             self.button_login.click()
 
-
     def verify_incorrect_email_pass(self):
         with allure.step('Проверяем появление ошибки входа'):
             self.error_login.should(be.visible)
