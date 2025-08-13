@@ -1,8 +1,10 @@
 import allure
 from selene import browser, be
 
+from src.automation_exercise.page_objects.stable_pages_object import StableObject
 
-class UserAccountPage:
+
+class UserAccountPage(StableObject):
     def __init__(self):
         self.male_gender = browser.element('#id_gender1')
         self.female_gender = browser.element('#id_gender2')
@@ -25,7 +27,6 @@ class UserAccountPage:
         self.zipcode = browser.element("[data-qa='zipcode']")
         self.mobile_number = browser.element("[data-qa='mobile_number']")
         self.button_create_account = browser.element("[data-qa='create-account']")
-
 
     def set_gender(self, value:str):
         with allure.step(f'Устанавливаем пол пользователя - {value}'):
@@ -142,11 +143,6 @@ class UserAccountPage:
     def press_button_create_account(self):
         with allure.step(f"Нажимаем кнопку CREATE-ACCOUNT"):
             self.button_create_account.click()
-
-    def scroll_page(self, step:int):
-        browser.execute_script(f"window.scrollBy(0, {step});")
-
-        return self
 
     def should_user_account_page_is_open(self):
         browser.element('h2.title').should(be.visible)
