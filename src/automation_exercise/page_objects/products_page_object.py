@@ -20,6 +20,7 @@ class ProductsPage(StableObject):
 
 	def add_wanted_product_in_cart(self, product_id):
 		with step(f'Добавляем товар в корзину с идентификатором - {product_id}'):
+			browser.element(f"[data-product-id='{product_id}']").hover()
 			browser.element(f"[data-product-id='{product_id}']").with_(timeout=2).click()
 
 	def search_product(self, value:str):
