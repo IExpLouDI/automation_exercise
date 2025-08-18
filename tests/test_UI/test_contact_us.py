@@ -6,7 +6,7 @@ from allure import step
 from src.automation_exercise.utils.paths import images_dir
 
 
-def test_contact_us_form(setup_browser, application, create_account):
+def test_contact_us_form(setup_remote_browser, application, create_account):
     with step('Открываем окно обратной связи'):
         application.navigation_bar.open_contact_us_page()
 

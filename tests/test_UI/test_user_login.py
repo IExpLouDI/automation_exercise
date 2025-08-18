@@ -3,7 +3,7 @@ from src.automation_exercise.utils.check_functions import check_website_is_open,
 from allure import step
 
 
-def test_user_login_with_correct_email_passw(setup_browser, create_account, application):
+def test_user_login_with_correct_email_passw(setup_remote_browser, create_account, application):
 
     with step('Проверяем что открыта домашняя страница'):
         check_website_is_open()
@@ -28,7 +28,7 @@ def test_user_login_with_correct_email_passw(setup_browser, create_account, appl
         application.navigation_bar.click_delete_user()
         check_account_is_deleted()
 
-def test_user_login_with_no_correct_email_passw(setup_browser, application):
+def test_user_login_with_no_correct_email_passw(setup_remote_browser, application):
 
     with step('Проверяем что открыта домашняя страница'):
         check_website_is_open()
@@ -50,7 +50,7 @@ def test_user_login_with_no_correct_email_passw(setup_browser, application):
         application.signup_login_page.verify_incorrect_email_pass()
 
 
-def test_user_logout(setup_browser, create_account, application):
+def test_user_logout(setup_remote_browser, create_account, application):
 
     with step('Переходим в окно авторизации'):
         application.navigation_bar.open_login_page()

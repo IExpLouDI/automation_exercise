@@ -1,4 +1,4 @@
-def test_verify_product_page_and_product_detail_page(setup_browser, application):
+def test_verify_product_page_and_product_detail_page(setup_remote_browser, application):
 	application.navigation_bar.products()
 	application.products.verify_open_products_page()
 	application.products.scroll_page(100)
@@ -7,7 +7,7 @@ def test_verify_product_page_and_product_detail_page(setup_browser, application)
 	application.products.check_product_detail_is_visible()
 
 
-def test_search_product(setup_browser, application):
+def test_search_product(setup_remote_browser, application):
 	application.navigation_bar.open_products_page()
 	application.products.search_product('Tshirt')
 	application.products.verify_searched_products_is_visible()

@@ -4,7 +4,7 @@ from src.automation_exercise.utils.check_functions import check_website_is_open,
 from src.automation_exercise.utils.check_functions import check_account_is_deleted
 
 
-def test_user_registration(setup_browser, create_user, application):
+def test_user_registration(setup_remote_browser, create_user, application):
 
     check_website_is_open()
 
@@ -63,7 +63,7 @@ def test_user_registration(setup_browser, create_user, application):
         check_account_is_deleted()
 
 
-def test_registration_user_with_existing_email(setup_browser, create_user, create_account, application):
+def test_registration_user_with_existing_email(setup_remote_browser, create_user, create_account, application):
 
     with allure.step('Открываем форму авторизации/регистрации'):
         application.navigation_bar.open_login_page()
