@@ -34,7 +34,7 @@ def setup_remote_browser():
 	}
 	options.add_argument("--start-maximized")
 	options.add_argument("--disable-blink-features=AutomationControlled")
-	options.page_load_strategy = "eager"
+	# options.page_load_strategy = "eager"
 	# options.add_experimental_option("excludeSwitches", ["enable-automation"])
 	# options.add_experimental_option("useAutomationExtension", False)
 
@@ -45,13 +45,10 @@ def setup_remote_browser():
 		options=options,
 	)
 	browser.config.driver = driver
-	# --disable -features = omit-cors-client -cert
-	# options.add_argument('--disable-features=OmitCorsClientCert')
-	# browser.config.driver_options = options
 
 	browser.config.base_url = 'https://www.automationexercise.com'
 	browser.open('/')
-	if browser.element("[aria-label='Consent']").with_(timeout=10).matching(be.present):
+	if browser.element("[aria-label='Consent']").with_().matching(be.present):
 		browser.element("[aria-label='Consent']").click()
 
 	yield browser
