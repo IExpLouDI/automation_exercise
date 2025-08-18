@@ -1,7 +1,7 @@
 from allure import step
 
 
-def test_add_product_in_cart(setup_remote_browser, application, products_list):
+def test_add_product_in_cart_from_product_page(setup_remote_browser, application, products_list):
 	with step(f'Открываем вкладку продуктов и делаем скролл вниз'):
 		application.navigation_bar.open_products_page()
 		application.products.scroll_page(300)
@@ -20,3 +20,7 @@ def test_add_product_in_cart(setup_remote_browser, application, products_list):
 				 )
 	with step('Выполняем проверку содержимого корзины'):
 		application.cart_page.check_product_in_cart(products_list)
+
+
+def test_add_product_from_product_detail_page(setup_remote_browser):
+	pass
