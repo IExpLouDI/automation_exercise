@@ -32,3 +32,11 @@ class ProductsPage(StableObject):
 	def verify_searched_products_is_visible(self):
 		with step('Проверяем, что представлено форма с результатами поиска'):
 			self.searched_products_title.should(be.present)
+
+	def press_button_continue_shopping(self):
+		with step('Нажимаем, кнопку "Continue Shopping"'):
+			browser.element('button.close-modal').click()
+
+	def click_view_cart_page(self):
+		with step('Нажимаем, кнопку "Continue Shopping"'):
+			browser.element('.modal-confirm a').click()

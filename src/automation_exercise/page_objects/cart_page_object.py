@@ -2,5 +2,5 @@ from src.automation_exercise.page_objects.stable_pages_object import StableObjec
 
 
 class CartPage(StableObject):
-    def __init__(self):
-        super().__init__()
+	def __init__(self):
+		super().__init__()
