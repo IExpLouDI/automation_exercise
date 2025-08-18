@@ -8,29 +8,27 @@ class CartPage(StableObject):
 	def __init__(self):
 		super().__init__()
 
-	def check_product_count_in_cart(self, products:list):
-		product_rows = browser.all('tbody tr[id^="product-"]')
+	def check_product_in_cart(self, products:list):
+		products_table = browser.element('#cart_info_table tbody')
 
 		with step(f'Проверяем, что количество товаров в корзине - {len(products)}'):
-			product_rows.should(have.size(len(products)))
+			products_table.all('tbody tr[id^="product-"]').should(have.size(len(products)))
 
-		with step(f'Проверяем товары в корзине'):
-			for i, expected_product in enumerate(products):
-				# Проверка названия продукта
-				with step(f'Название товара совпадает с {expected_product.name}'):
-					product_rows[i].element('.cart_description h4 a').should(have.exact_text(expected_product.name))
+		for expected_product in products:
+			with step(f'Проверяем товар {expected_product.name} (ID: {expected_product.product_id})'):
 
-				with step(f'Категория товара совпадает с {expected_product.category}'):
-					product_rows[i].element('.cart_description p').should(have.exact_text(expected_product.category))
+				product_row = browser.element(f'tr[id="product-{expected_product.product_id}"]')
 
-				with step(f'Цена товара совпадает с {expected_product.price}'):
-					product_rows[i].element('.cart_price p'
-											).should(be.present, have.exact_text(expected_product.price))
+				checks = [
+					('.cart_description h4 a', 'название', expected_product.name),
+					('.cart_description p', 'категория', expected_product.category),
+					('.cart_price p', 'цена', expected_product.price),
+					('.cart_quantity button', 'количество', expected_product.quantity),
+					('.cart_total_price', 'общая стоимость', expected_product.total_price)
+				]
 
-				with step(f'Количество товара совпадает с {expected_product.quantity}'):
-					product_rows[i].element('.cart_quantity button'
-											).should(be.present, have.exact_text(expected_product.quantity))
-
-				with step(f'Название товара совпадает с {expected_product.total_price}'):
-					product_rows[i].element('.cart_total_price'
-											).should(be.present, have.exact_text(expected_product.total_price))
+				for selector, attr_name, expected_value in checks:
+					with step(f'Параметр "{attr_name}" совпадает с {expected_value}'):
+						product_row.element(selector).should(
+							have.exact_text(expected_value)
+						)
