@@ -5,3 +5,4 @@ def test_add_product_in_cart(setup_remote_browser, application):
 	application.products.press_button_continue_shopping()
 	application.products.add_wanted_product_in_cart(2)
 	application.products.click_view_cart_page()
+	application.

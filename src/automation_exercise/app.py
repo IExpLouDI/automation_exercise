@@ -1,3 +1,4 @@
+from src.automation_exercise.page_objects.cart_page_object import CartPage
 from src.automation_exercise.page_objects.contact_us_page_object import ContactUsPage
 from src.automation_exercise.page_objects.footer_page_object import Footer
 from src.automation_exercise.page_objects.home_page_object import HomePage
@@ -16,3 +17,4 @@ class Application:
 		self.products = ProductsPage()
 		self.home_page = HomePage()
 		self.footer = Footer()
+		self.cart_page = CartPage()
