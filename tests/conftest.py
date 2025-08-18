@@ -1,8 +1,5 @@
-import random
-
 import pytest
 from selene import browser, be
-from selenium.webdriver.chrome import options
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from dotenv import load_dotenv
@@ -10,6 +7,7 @@ import os
 
 from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.app import Application
+from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User
 
@@ -104,3 +102,7 @@ def create_user():
 def create_account(create_user):
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)
+
+@pytest.fixture()
+def products_list():
+	return [product_men_tshirt, product_women_blue_top]
