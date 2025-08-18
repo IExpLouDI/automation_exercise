@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -8,7 +7,7 @@ class ProductCard:
     category: str
     price: str
     quantity: str
-    product_id: Optional[str] = None
+    product_id: str
 
     @property
     def total_price(self):
