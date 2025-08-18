@@ -18,10 +18,12 @@ class ProductsPage(StableObject):
 		with step('Проверяем, что текст - ALL PRODUCTS'):
 			self.page_name.should(have.exact_text('ALL PRODUCTS'))
 
-	def add_wanted_product_in_cart(self, product_id):
+	def add_wanted_product_in_cart(self, product_id:str):
 		with step(f'Добавляем товар в корзину с идентификатором - {product_id}'):
 			browser.element(f"[data-product-id='{product_id}']").hover()
 			browser.element(f".overlay-content [data-product-id='{product_id}']").with_(timeout=2).click()
+
+		return self
 
 	def search_product(self, value:str):
 		with step(f'Вводим {value[:10]} в строку поиска'):
@@ -37,6 +39,10 @@ class ProductsPage(StableObject):
 		with step('Нажимаем, кнопку "Continue Shopping"'):
 			browser.element('button.close-modal').click()
 
+		return self
+
 	def click_view_cart_page(self):
 		with step('Нажимаем, кнопку "Continue Shopping"'):
 			browser.element('.modal-confirm a').click()
+
+		return self
