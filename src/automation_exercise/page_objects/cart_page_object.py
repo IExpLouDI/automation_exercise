@@ -7,6 +7,7 @@ from src.automation_exercise.page_objects.stable_pages_object import StableObjec
 class CartPage(StableObject):
 	def __init__(self):
 		super().__init__()
+		self.button_proceed_to_checkout = browser.element('div .check_out')
 
 	def check_product_in_cart(self, products:list):
 		products_table = browser.element('#cart_info_table tbody')
@@ -32,3 +33,14 @@ class CartPage(StableObject):
 						product_row.element(selector).should(
 							have.exact_text(expected_value)
 						)
+	def press_button_proceed_to_checkout(self):
+		with step('Нажимаем на кнопку proceed_to_checkout'):
+			self.button_proceed_to_checkout.click()
+
+	def press_button_continue_on_cart(self):
+		with step('Нажимаем на кнопку continue_on_cart'):
+			browser.element('div .close-checkout-modal').click()
+
+	def click_register_or_login_link(self):
+		with step('Кликаем по ссылке Register / Login'):
+			browser.element(".modal-content [href='/login']").click()
