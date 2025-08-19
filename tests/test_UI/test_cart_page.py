@@ -22,5 +22,24 @@ def test_add_product_in_cart_from_product_page(setup_remote_browser, application
 		application.cart_page.check_product_in_cart(products_list)
 
 
-def test_add_product_from_product_detail_page(setup_remote_browser):
-	pass
+def test_verify_product_quantity_in_cart(setup_browser, application, products_list):
+	test_product = products_list[0]
+	test_product.set_quantity(4)
+
+	with step(f'Делаем скролл вниз до появления товаров и переходим в карточку товара - {test_product.name}'):
+		(application.home_page
+		 .scroll_page(500)
+		 .click_view_product(test_product.product_id)
+		 )
+	with step('Проверяем наполнение карточки товара'):
+		application.product_detail_page.check_product_detail(test_product)
+
+	with step(f'Устанавливаем количество товара - {test_product.quantity}'):
+		application.product_detail_page.set_product_quantity(test_product.quantity)
+		application.product_detail_page.press_button_add_to_cart()
+
+	application.products.press_button_continue_shopping()
+
+	with step('Открываем корзину и проверяем добавленный товар'):
+		application.navigation_bar.open_cart_page()
+		application.cart_page.check_product_in_cart([test_product])
