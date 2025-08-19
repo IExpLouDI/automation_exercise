@@ -15,3 +15,8 @@ class ProductCard:
         price = int(''.join(el for el in self.price.replace(' ', '') if el.isdigit()))
         quantity = int(self.quantity)
         return f'{currency} {price * quantity}'
+
+    def set_quantity(self, value: int) -> None:
+        if value <= 0:
+            raise ValueError("Quantity must be positive")
+        self.quantity = str(value)
