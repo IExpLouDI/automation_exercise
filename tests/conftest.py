@@ -14,7 +14,7 @@ from src.automation_exercise.data.user import User
 from src.automation_exercise.API.post_request import post_create_account
 
 
-@pytest.fixture(autouse=False, scope='session')
+@pytest.fixture(autouse=False, scope='function')
 def setup_remote_browser():
 	load_dotenv()
 	SELENOID_LOGIN = os.getenv('SELENOID_LOGIN')
