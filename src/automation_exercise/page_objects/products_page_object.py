@@ -1,4 +1,5 @@
 from selene import browser, be, have
+from selene.core.condition import Condition
 from allure import step
 
 from src.automation_exercise.page_objects.stable_pages_object import StableObject
@@ -32,8 +33,15 @@ class ProductsPage(StableObject):
 			self.button_search_product.click()
 
 	def verify_searched_products_is_visible(self):
-		with step('Проверяем, что представлено форма с результатами поиска'):
+		with step('Проверяем, что представлена форма с результатами поиска'):
 			self.searched_products_title.should(be.present)
+
+	def verify_all_products_are_visible(self):
+		with step('Проверяем, что товары представлены на странице'):
+			products = browser.all('.productinfo').should(be.visible.each)
+
+			for product in products:
+				product.should(be.visible)
 
 	def press_button_continue_shopping(self):
 		with step('Нажимаем, кнопку "Continue Shopping"'):

@@ -14,11 +14,10 @@ from src.automation_exercise.data.user import User
 from src.automation_exercise.API.post_request import post_create_account
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture(autouse=False, scope='session')
 def setup_remote_browser():
 	load_dotenv()
 	SELENOID_LOGIN = os.getenv('SELENOID_LOGIN')
-
 
 	SELENOID_PASSWORD = os.getenv('SELENOID_PASSWORD')
 	SELENOID_HOST = os.getenv('SELENOID_HOST')
@@ -102,6 +101,7 @@ def create_user():
 def create_account(create_user):
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)
+
 
 @pytest.fixture()
 def products_list():
