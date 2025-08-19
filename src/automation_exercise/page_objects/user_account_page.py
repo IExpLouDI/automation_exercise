@@ -1,6 +1,7 @@
 import allure
 from selene import browser, be
 
+from src.automation_exercise.data.user import User
 from src.automation_exercise.page_objects.stable_pages_object import StableObject
 
 
@@ -147,3 +148,28 @@ class UserAccountPage(StableObject):
 
     def should_user_account_page_is_open(self):
         browser.element('h2.title').should(be.visible)
+
+
+    def fill_user_personal_data(self, user_data:User):
+        (self.set_gender(user_data.gender)
+         .enter_password(user_data.password)
+         .scroll_page(300)
+         .set_birthday(user_data.day,
+                      user_data.month,
+                      user_data.year)
+        .press_newslatter_check_box()
+        .press_special_offer_check_box()
+        .scroll_page(300)
+        .enter_first_name(user_data.first_name)
+        .enter_last_name(user_data.last_name)
+        .enter_company(user_data.company_name)
+        .scroll_page(300)
+        .enter_first_address(user_data.first_address)
+        .enter_second_address(user_data.second_address)
+        .scroll_page(100)
+        .set_country(user_data.country)
+        .enter_state(user_data.state)
+        .enter_city(user_data.city)
+        .enter_zip_code(user_data.zipcode)
+        .enter_mobile_number(user_data.mobile_number)
+         )
