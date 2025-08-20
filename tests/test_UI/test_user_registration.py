@@ -96,4 +96,17 @@ def test_registration_while_checkout(setup_remote_browser, application, products
     application.navigation_bar.open_cart_page()
     application.cart_page.press_button_proceed_to_checkout()
 
-    pass
+    application.check_out_page.verify_checkout_page_open()
+    application.stable_elements.scroll_page(200)
+
+    application.check_out_page.check_delivery_address_params(create_user)
+    application.check_out_page.check_billing_address_params(create_user)
+    application.stable_elements.scroll_page(200)
+
+    application.check_out_page.verify_order_list(list(products_list[0]))
+    application.stable_elements.scroll_page(300)
+
+    application.check_out_page.enter_order_message('Успех приходит к тем, кто умеет применять свои знания!')
+    application.check_out_page.press_button_place_order()
+
+
