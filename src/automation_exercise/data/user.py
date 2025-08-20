@@ -27,6 +27,11 @@ class User(Person):
     company_name: str = None
     want_newslater: bool = True
     want_special_offer: bool = True
+    __name_card: str = None
+    __card_number: str = None
+    __cvc: str = None
+    __expiration_month: str = None
+    __expiration_year: str = None
 
     @property
     def get_user_param(self):
@@ -42,3 +47,10 @@ class User(Person):
         ]
 
         return params_list
+
+    def add_user_card(self, card_name, card_number, cvc_code, expiration_month, expiration_year):
+        self.__cvc = cvc_code
+        self.__name_card = card_name
+        self.__card_number = card_number
+        self.__expiration_month = expiration_month
+        self.__expiration_year = expiration_year

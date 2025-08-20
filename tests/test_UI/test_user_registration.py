@@ -77,7 +77,7 @@ def test_registration_user_with_existing_email(setup_remote_browser, create_user
     with allure.step('Проверяем появление ошибки'):
         application.signup_login_page.verify_enter_existing_email()
 
-def test_register_while_checkout(setup_remote_browser, application, products_list, create_user):
+def test_registration_while_checkout(setup_remote_browser, application, products_list, create_user):
     application.navigation_bar.open_products_page()
     application.products.add_wanted_product_in_cart(products_list[0].product_id)
     application.navigation_bar.open_cart_page()
@@ -86,5 +86,14 @@ def test_register_while_checkout(setup_remote_browser, application, products_lis
     application.signup_login_page.type_email(create_user.email)
     application.signup_login_page.type_sign_up_name(create_user.nick_name)
     application.user_account_page.fill_user_personal_data(create_user)
+
+    with allure.step('Проверяем появление окна успешного создания пользователя'):
+        check_account_is_create()
+
+    with allure.step('Проверяем, что пользователь залогинен после создания'):
+        application.navigation_bar.check_user_is_login(create_user.nick_name)
+
+    application.navigation_bar.open_cart_page()
+    application.cart_page.press_button_proceed_to_checkout()
 
     pass

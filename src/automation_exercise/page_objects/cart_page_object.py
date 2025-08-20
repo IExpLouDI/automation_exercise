@@ -33,6 +33,7 @@ class CartPage(StableObject):
 						product_row.element(selector).should(
 							have.exact_text(expected_value)
 						)
+
 	def press_button_proceed_to_checkout(self):
 		with step('Нажимаем на кнопку proceed_to_checkout'):
 			self.button_proceed_to_checkout.click()

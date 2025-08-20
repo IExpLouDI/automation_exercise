@@ -75,13 +75,13 @@ def setup_browser():
 @pytest.fixture()
 def create_user():
 	user = User(
-		nick_name='T1',
+		nick_name='Testovich',
 		email='T2@test.com',
 		password='Qwe123',
-		company_name='T2',
+		company_name='Trevor Corporation',
 		country=Country.india.value,
-		first_name='T3',
-		last_name='T4',
+		first_name='Trevor',
+		last_name='Laxtin',
 		gender='male',
 		day='10',
 		month=Months.may.value[0],
