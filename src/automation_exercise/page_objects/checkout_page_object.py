@@ -12,11 +12,11 @@ class CheckoutPage:
         self.page_verify_attribute = browser.element("//h2[contains(text(), 'Address')]")
         self.delivery_address_params = browser.element('#address_delivery li ~ li')
         self.billing_address_params = browser.element('#address_invoice li ~ li')
-        self.description_product_name = browser.element('.cart_description a')
-        self.description_product_category = browser.element('.cart_description p')
-        self.product_price = browser.element('.cart_price p')
-        self.product_quantity = browser.element('.cart_quantity button')
-        self.product_total_price = browser.element('.cart_total p')
+        self.description_product_name = '.cart_description a'
+        self.description_product_category = '.cart_description p'
+        self.product_price = '.cart_price p'
+        self.product_quantity = '.cart_quantity button'
+        self.product_total_price = '.cart_total p'
         self.order_message = browser.element('#ordermsg textarea')
         self.button_check_out = browser.element('div .check_out')
 
