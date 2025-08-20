@@ -27,3 +27,18 @@ class User(Person):
     company_name: str = None
     want_newslater: bool = True
     want_special_offer: bool = True
+
+    @property
+    def get_user_param(self):
+        user_gender = 'Mr.' if self.gender == 'male' else 'Mrs.'
+        params_list = [
+            f'{user_gender} {self.first_name} {self.last_name}',
+            self.company_name,
+            self.first_address,
+            self.second_address,
+            f'{self.city} {self.state} {self.zipcode}',
+            self.country.value,
+            self.mobile_number
+        ]
+
+        return params_list
