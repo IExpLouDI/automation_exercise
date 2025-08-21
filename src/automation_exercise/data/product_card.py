@@ -20,3 +20,6 @@ class ProductCard:
         if value <= 0:
             raise ValueError("Quantity must be positive")
         self.quantity = str(value)
+
+    def __repr__(self):
+        return f'Product - {self.name}, quantity - {self.quantity}, price - {self.price}'

@@ -50,7 +50,7 @@ class ProductsPage(StableObject):
 		return self
 
 	def click_view_cart_page(self):
-		with step('Нажимаем, кнопку "Continue Shopping"'):
+		with step('Кликаем по ссылке "View Cart"'):
 			browser.element('.modal-confirm a').click()
 
 		return self

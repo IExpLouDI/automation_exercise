@@ -1,5 +1,5 @@
 import allure
-from selene import browser, be, have
+from selene import browser, be
 
 
 @allure.step('Проверяем, что открыт сайт https://www.automationexercise.com')

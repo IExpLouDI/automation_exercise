@@ -54,12 +54,14 @@ class User(Person):
             self.first_address,
             self.second_address,
             f'{self.city} {self.state} {self.zipcode}',
-            self.country.value,
+            self.country,
             self.mobile_number
         ]
 
         return params_list
 
-
     def add_card(self, card_data: UserCard):
         self.card = card_data
+
+    def __repr__(self):
+        return f'nickname - {self.nick_name}, email - {self.email}'

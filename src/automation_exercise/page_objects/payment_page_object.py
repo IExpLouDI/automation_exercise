@@ -36,11 +36,11 @@ class PaymentPage:
         with step(f'Заполнение года expiration: "{year}"'):
             self.input_expiry_year.type(year)
 
-    def click_pay_button(self):
+    def press_pay_button(self):
         with step('Нажатие кнопки "Pay and Confirm Order"'):
             self.button_pay.click()
 
-    def fill_card_details_from_object(self, card:UserCard):
+    def fill_card_details_from_user_card(self, card:UserCard):
         with step(f'Заполнение данных карты: {card}'):
             self.fill_name_on_card(card.name)
             self.fill_card_number(card.number)
@@ -53,9 +53,12 @@ class PaymentPage:
             self.page_name.should(be.visible)
 
     def verify_order_is_placed(self):
-        with step('Проверка успешного формирования заказа'):
+        with (step('Проверка успешного формирования заказа')):
             browser.element("[data-qa='order-placed']").should(be.present)
-            browser.element('.message').should(have.exact_text('Your order has been placed successfully!'))
+
+            browser.element("[data-qa='order-placed'] ~ p"
+                            ).should(have.exact_text('Your order has been placed successfully!'))
+
             browser.element("[data-qa='continue-button']").click()
 
     def press_download_invoice(self):

@@ -8,6 +8,7 @@ import os
 from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.app import Application
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
+from src.automation_exercise.utils.attachments import add_video
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User, UserCard
 
@@ -49,6 +50,8 @@ def setup_remote_browser():
 		browser.element("[aria-label='Consent']").click()
 
 	yield browser
+
+	add_video(browser)
 
 	browser.quit()
 
