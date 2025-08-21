@@ -9,7 +9,7 @@ from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.app import Application
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
 from src.automation_exercise.utils.static_values import Country, Months
-from src.automation_exercise.data.user import User
+from src.automation_exercise.data.user import User, UserCard
 
 from src.automation_exercise.API.post_request import post_create_account
 
@@ -93,6 +93,15 @@ def create_user():
 		zipcode='2331144',
 		mobile_number='34534222323'
 	)
+	user_card = UserCard(
+		name=f'{user.first_name.upper()} {user.last_name}',
+		number='5677654433225566',
+		cvc='111',
+		expiration_month='02',
+		expiration_year='2030'
+	)
+
+	user.add_card(user_card)
 
 	return user
 
