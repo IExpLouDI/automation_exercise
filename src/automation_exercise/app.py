@@ -4,6 +4,7 @@ from src.automation_exercise.page_objects.contact_us_page_object import ContactU
 from src.automation_exercise.page_objects.footer_page_object import Footer
 from src.automation_exercise.page_objects.home_page_object import HomePage
 from src.automation_exercise.page_objects.navigation_bar_object import NavigationBar
+from src.automation_exercise.page_objects.payment_page_object import PaymentPage
 from src.automation_exercise.page_objects.product_detail_page_object import ProductDetailPage
 from src.automation_exercise.page_objects.products_page_object import ProductsPage
 from src.automation_exercise.page_objects.signup_login_page_object import SignUpLoginPage
@@ -24,3 +25,4 @@ class Application:
 		self.product_detail_page = ProductDetailPage()
 		self.check_out_page = CheckoutPage()
 		self.stable_elements = StableObject()
+		self.payment_page = PaymentPage()
