@@ -24,8 +24,15 @@ class UserCard:
     name: str
     number: str
     cvc: str
-    expiration_month: int
-    expiration_year: int
+    expiration_month: str
+    expiration_year: str
+
+    @property
+    def masked_number(self) -> str:
+        return f"**** **** **** {self.number[-4:]}"
+
+    def __repr__(self):
+        return f'user - {self.name}. card - {self.masked_number}'
 
 
 @dataclass
