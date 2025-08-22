@@ -115,7 +115,7 @@ def test_registration_while_checkout(setup_remote_browser, application, products
         application.check_out_page.check_billing_address_params(create_user)
         application.stable_elements.scroll_page(200)
 
-        application.check_out_page.verify_order_list(list(products_list[0]))
+        application.check_out_page.verify_order_list([products_list[0]])
         application.stable_elements.scroll_page(300)
 
         application.check_out_page.enter_order_message('Успех приходит к тем, кто умеет применять свои знания, '
@@ -131,7 +131,6 @@ def test_registration_while_checkout(setup_remote_browser, application, products
 
     with step('Проверяем что заказ сформирован'):
         application.payment_page.verify_order_is_placed()
-        application.payment_page.press_continue()
 
     with step('Удаляем пользователя'):
         application.navigation_bar.click_delete_user()

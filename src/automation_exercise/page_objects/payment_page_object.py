@@ -8,7 +8,7 @@ class PaymentPage:
     def __init__(self):
         self.page_name = browser.element('div .heading')
         self.input_name_on_card = browser.element("[data-qa='name-on-card']")
-        self.input_card_number = browser.element("[data-qa='card_number']")
+        self.input_card_number = browser.element("[data-qa='card-number']")
         self.input_cvc_code = browser.element("[data-qa='cvc']")
         self.input_expiry_month = browser.element("[data-qa='expiry-month']")
         self.input_expiry_year = browser.element("[data-qa='expiry-year']")
@@ -57,7 +57,7 @@ class PaymentPage:
             browser.element("[data-qa='order-placed']").should(be.present)
 
             browser.element("[data-qa='order-placed'] ~ p"
-                            ).should(have.exact_text('Your order has been placed successfully!'))
+                            ).should(have.exact_text('Congratulations! Your order has been confirmed!'))
 
             browser.element("[data-qa='continue-button']").click()
 

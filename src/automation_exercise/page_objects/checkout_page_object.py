@@ -10,8 +10,8 @@ from src.automation_exercise.data.user import User
 class CheckoutPage:
     def __init__(self):
         self.page_verify_attribute = browser.element("//h2[contains(text(), 'Address')]")
-        self.delivery_address_params = browser.element('#address_delivery li ~ li')
-        self.billing_address_params = browser.element('#address_invoice li ~ li')
+        self.delivery_address_params = browser.all('#address_delivery li ~ li')
+        self.billing_address_params = browser.all('#address_invoice li ~ li')
         self.description_product_name = '.cart_description a'
         self.description_product_category = '.cart_description p'
         self.product_price = '.cart_price p'
