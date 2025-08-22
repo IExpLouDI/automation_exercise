@@ -2,8 +2,11 @@ import pytest
 from selene import browser, be
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+from selenium.webdriver.remote.client_config import ClientConfig
 from dotenv import load_dotenv
 import os
+
+from selenium.webdriver.remote.remote_connection import RemoteConnection
 
 from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.app import Application
@@ -32,16 +35,23 @@ def setup_remote_browser():
 	}
 	options.add_argument("--start-maximized")
 	options.add_argument("--disable-blink-features=AutomationControlled")
-	# options.page_load_strategy = "eager"
-	# options.add_experimental_option("excludeSwitches", ["enable-automation"])
-	# options.add_experimental_option("useAutomationExtension", False)
 
 	options.capabilities.update(selenoid_capabilities)
 
-	driver = webdriver.Remote(
-		command_executor=f'https://{SELENOID_LOGIN}:{SELENOID_PASSWORD}@{SELENOID_HOST}/wd/hub',
-		options=options,
+	client_config = ClientConfig(
+		remote_server_addr=f'https://{SELENOID_HOST}/wd/hub',
+		keep_alive=True
 	)
+	client_config.username = SELENOID_LOGIN
+	client_config.password = SELENOID_PASSWORD
+
+	connection = RemoteConnection(client_config=client_config)
+
+	driver = webdriver.Remote(
+		command_executor=connection,
+		options=options
+	)
+
 	browser.config.driver = driver
 
 	browser.config.base_url = 'https://www.automationexercise.com'
@@ -77,6 +87,7 @@ def setup_browser():
 
 @pytest.fixture()
 def create_user():
+	"""Создание пользователя для регистрации"""
 	user = User(
 		nick_name='Testovich',
 		email='T2@test.com',
@@ -111,6 +122,7 @@ def create_user():
 
 @pytest.fixture()
 def create_account(create_user):
+	"""Создаёт пользователя и по окончанию теста - удаляет"""
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)
 
