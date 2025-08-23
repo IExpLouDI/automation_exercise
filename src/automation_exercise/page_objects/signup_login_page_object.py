@@ -10,7 +10,7 @@ class SignUpLoginPage:
         self.login_password = browser.element("[data-qa='login-password']")
         self.button_signup = browser.element("[data-qa='signup-button']")
         self.button_login = browser.element("[data-qa='login-button']")
-        self.error_login = browser.element("form[action='/signup'] p")
+        self.error_login = browser.element("form[action='/login'] p")
         self.error_signup = browser.element("form[action='/signup'] p")
 
     def type_sign_up_name(self, value):
