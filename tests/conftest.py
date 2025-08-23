@@ -56,6 +56,9 @@ def setup_remote_browser():
 
 	browser.config.base_url = 'https://www.automationexercise.com'
 	browser.open('/')
+	browser.driver.execute_script("$('#fixedban').remove()")
+	browser.driver.execute_script("$('footer').remove()")
+
 	if browser.element("[aria-label='Consent']").with_().matching(be.present):
 		browser.element("[aria-label='Consent']").click()
 
@@ -85,7 +88,7 @@ def setup_browser():
 	browser.quit()
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def create_user():
 	"""Создание пользователя для регистрации"""
 	user = User(
@@ -120,13 +123,13 @@ def create_user():
 	return user
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def create_account(create_user):
 	"""Создаёт пользователя и по окончанию теста - удаляет"""
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def products_list():
 	return [product_men_tshirt, product_women_blue_top]
