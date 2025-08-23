@@ -1,7 +1,7 @@
 from typing import List
 
 from allure import step
-from selene import browser, have, be
+from selene import browser, have
 
 from src.automation_exercise.data.product_card import ProductCard
 from src.automation_exercise.page_objects.stable_pages_object import StableObject

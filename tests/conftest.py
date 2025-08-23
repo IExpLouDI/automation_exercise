@@ -57,7 +57,7 @@ def setup_remote_browser():
 	browser.config.base_url = 'https://www.automationexercise.com'
 	browser.open('/')
 	browser.driver.execute_script("$('#fixedban').remove()")
-	browser.driver.execute_script("$('footer').remove()")
+	# browser.driver.execute_script("$('footer').remove()")
 
 	if browser.element("[aria-label='Consent']").with_().matching(be.present):
 		browser.element("[aria-label='Consent']").click()
