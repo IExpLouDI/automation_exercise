@@ -1,6 +1,9 @@
+from typing import List
+
 from allure import step
 from selene import browser, have, be
 
+from src.automation_exercise.data.product_card import ProductCard
 from src.automation_exercise.page_objects.stable_pages_object import StableObject
 
 
@@ -45,3 +48,12 @@ class CartPage(StableObject):
 	def click_register_or_login_link(self):
 		with step('Кликаем по ссылке Register / Login'):
 			browser.element(".modal-content [href='/login']").click()
+
+	def clear_cart(self, products: List[ProductCard]):
+		with step('Очищаем корзину от товаров'):
+			for product in products:
+				with step(f'Убираем из корзины товар - {product}'):
+					browser.element(f"[data-product-id='{product.product_id}']").click()
+
+		with step('Проверяем что корзина пуста'):
+			browser.element('#empty_cart b').should(have.text('Cart is empty!'))
