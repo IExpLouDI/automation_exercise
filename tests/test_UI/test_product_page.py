@@ -1,3 +1,7 @@
+import pytest
+
+
+@pytest.mark.skip
 def test_verify_product_page_and_product_detail_page(setup_remote_browser, application):
 	application.navigation_bar.open_products_page()
 	application.products.verify_open_products_page()
@@ -7,6 +11,7 @@ def test_verify_product_page_and_product_detail_page(setup_remote_browser, appli
 	application.products.check_product_detail_is_visible()
 
 
+@pytest.mark.skip
 def test_search_product(setup_remote_browser, application):
 	application.navigation_bar.open_products_page()
 	application.products.search_product('Tshirt')

@@ -43,3 +43,19 @@ def test_verify_product_quantity_in_cart(setup_remote_browser, application, prod
 	with step('Открываем корзину и проверяем добавленный товар'):
 		application.navigation_bar.open_cart_page()
 		application.cart_page.check_product_in_cart([test_product])
+
+
+def test_remove_products_from_cart(setup_remote_browser, application, create_account, products_list):
+	application.signup_login_page.type_email(create_account["email"], is_login=True)
+	application.signup_login_page.type_password(create_account['password'])
+	application.signup_login_page.pres_button_login()
+
+	application.navigation_bar.open_products_page()
+	application.stable_elements.scroll_page(500)
+
+	for product in products_list:
+		application.products.add_wanted_product_in_cart(product.product_id)
+		application.products.press_button_continue_shopping()
+
+	application.navigation_bar.open_cart_page()
+
