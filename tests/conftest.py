@@ -132,4 +132,8 @@ def create_account(create_user):
 
 @pytest.fixture(scope='function')
 def products_list():
-	return [product_men_tshirt, product_women_blue_top]
+	products = [product_men_tshirt, product_women_blue_top]
+	yield products
+
+	for product in products:
+		product.reset_quantity()

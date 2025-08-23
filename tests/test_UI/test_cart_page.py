@@ -44,8 +44,6 @@ def test_verify_product_quantity_in_cart(setup_remote_browser, application, prod
 		application.navigation_bar.open_cart_page()
 		application.cart_page.check_product_in_cart([test_product])
 
-	test_product.set_quantity(1)
-
 
 def test_remove_products_from_cart(setup_remote_browser, application, create_account, products_list):
 	with step('Авторизация и переход на страницу с товарами'):
