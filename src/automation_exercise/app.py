@@ -1,7 +1,7 @@
 from src.automation_exercise.API.delete_request import DeleteRequest
 from src.automation_exercise.API.get_request import GetRequests
 from src.automation_exercise.API.post_request import PostRequest
-from src.automation_exercise.data.user import User
+from src.automation_exercise.API.put_request import PutRequest
 from src.automation_exercise.page_objects.cart_page_object import CartPage
 from src.automation_exercise.page_objects.checkout_page_object import CheckoutPage
 from src.automation_exercise.page_objects.contact_us_page_object import ContactUsPage
@@ -37,3 +37,4 @@ class APIManager:
 		self.get = GetRequests()
 		self.post = PostRequest()
 		self.delete = DeleteRequest()
+		self.put = PutRequest()
