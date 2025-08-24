@@ -1,6 +1,26 @@
+from typing import Dict
+
 import requests
 
-def delete_account(user_email, user_password):
+from src.automation_exercise.API.automation_exercise_api import AutomationExerciseAPI
+
+
+class DeleteRequest(AutomationExerciseAPI):
+    METHOD_NAME = "DELETE"
+
+    def delete_user_account(self, email:str, password:str) -> Dict[str, any]:
+        payload = {
+            'email': email,
+            'password': password
+        }
+
+        return self._make_request(self.METHOD_NAME, 'deleteAccount', data=payload)
+
+    def delete_verify_login(self):
+        return self._make_request(self.METHOD_NAME, 'verifyLogin')
+
+
+def delete_account(user_email, user_password) -> Dict[str, any]:
     api_url = "https://automationexercise.com/api/deleteAccount"
 
     payload = (f'email={user_email}&'

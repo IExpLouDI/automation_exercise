@@ -1,3 +1,4 @@
+from src.automation_exercise.API.delete_request import DeleteRequest
 from src.automation_exercise.API.get_request import GetRequests
 from src.automation_exercise.API.post_request import PostRequest
 from src.automation_exercise.data.user import User
@@ -35,3 +36,4 @@ class APIManager:
 	def __init__(self):
 		self.get = GetRequests()
 		self.post = PostRequest()
+		self.delete = DeleteRequest()
