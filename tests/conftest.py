@@ -9,12 +9,12 @@ import os
 from selenium.webdriver.remote.remote_connection import RemoteConnection
 
 from src.automation_exercise.API.delete_request import delete_account
-from src.automation_exercise.app import UIManager
+from src.automation_exercise.app import UIManager, APIManager
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
 from src.automation_exercise.utils.attachments import add_video
+from src.automation_exercise.utils.paths import schemas_dir
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User, UserCard
-
 from src.automation_exercise.API.post_request import post_create_account
 
 
@@ -137,3 +137,19 @@ def products_list():
 
 	for product in products:
 		product.reset_quantity()
+
+
+@pytest.fixture(scope='function')
+def api_application():
+	return APIManager()
+
+@pytest.fixture(scope='function')
+def load_schema():
+	schemas_paths_dict = {
+		'get_all_product_list': os.path.join(schemas_dir, 'schemas_get_all_products_list.json'),
+		'post_search_product': os.path.join(schemas_dir, 'schema_post_search_product.json'),
+		'get_user_account_detail': os.path.join(schemas_dir, 'schema_get_user_account_detail.json'),
+		'get_brands_list': os.path.join(schemas_dir, 'schema_get_brands_list.json')
+	}
+
+	return schemas_paths_dict
