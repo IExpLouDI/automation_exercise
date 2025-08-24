@@ -9,7 +9,7 @@ import os
 from selenium.webdriver.remote.remote_connection import RemoteConnection
 
 from src.automation_exercise.API.delete_request import delete_account
-from src.automation_exercise.app import Application
+from src.automation_exercise.app import UIManager
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
 from src.automation_exercise.utils.attachments import add_video
 from src.automation_exercise.utils.static_values import Country, Months
@@ -71,7 +71,7 @@ def setup_remote_browser():
 
 @pytest.fixture()
 def application():
-	app = Application()
+	app = UIManager()
 	return app
 
 

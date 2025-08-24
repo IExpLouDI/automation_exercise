@@ -1,3 +1,6 @@
+from src.automation_exercise.API.get_request import GetRequests
+from src.automation_exercise.API.post_request import PostRequest
+from src.automation_exercise.data.user import User
 from src.automation_exercise.page_objects.cart_page_object import CartPage
 from src.automation_exercise.page_objects.checkout_page_object import CheckoutPage
 from src.automation_exercise.page_objects.contact_us_page_object import ContactUsPage
@@ -12,7 +15,7 @@ from src.automation_exercise.page_objects.stable_pages_object import StableObjec
 from src.automation_exercise.page_objects.user_account_page import UserAccountPage
 
 
-class Application:
+class UIManager:
 	def __init__(self):
 		self.navigation_bar = NavigationBar()
 		self.signup_login_page = SignUpLoginPage()
@@ -26,3 +29,9 @@ class Application:
 		self.check_out_page = CheckoutPage()
 		self.stable_elements = StableObject()
 		self.payment_page = PaymentPage()
+
+
+class APIManager:
+	def __init__(self):
+		self.get = GetRequests()
+		self.post = PostRequest()
