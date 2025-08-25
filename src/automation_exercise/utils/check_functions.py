@@ -34,12 +34,12 @@ def check_response_content(response:dict, valid_content:dict) -> None:
             assert response.get('user').get(key) == valid_content.get(key)
 
 
-def check_response_status_and_message_business_code(response: dict,
-                                                    wait_status_code:int,
-                                                    wait_business_code:int = None) -> None:
-    with step(f'Проверка статуса ответа = {wait_status_code}'):
-        assert response.get('status_code') == wait_status_code
-
-    if wait_business_code is not None:
-        with step(f'Проверка бизнес кода ответа = {wait_business_code}'):
-            assert response.get('response').get('responseCode') == wait_business_code
+# def check_response_status_and_message_business_code(response: dict,
+#                                                     wait_status_code:int,
+#                                                     wait_business_code:int = None) -> None:
+#     with step(f'Проверка статуса ответа = {wait_status_code}'):
+#         assert response.get('status_code') == wait_status_code
+#
+#     if wait_business_code is not None:
+#         with step(f'Проверка бизнес кода ответа = {wait_business_code}'):
+#             assert response.get('response').get('responseCode') == wait_business_code
