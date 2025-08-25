@@ -24,13 +24,13 @@ class CheckoutPage:
         self.page_verify_attribute.should(be.present)
 
     def check_delivery_address_params(self, user_params: User):
-        with step(f'Параметры доставки совпадают с {user_params.get_user_param}'):
-            self.delivery_address_params.should(have.exact_texts(user_params.get_user_param))
+        with step(f'Параметры доставки совпадают с {user_params.short_info}'):
+            self.delivery_address_params.should(have.exact_texts(user_params.short_info))
 
 
     def check_billing_address_params(self, user_params: User):
-        with step(f'Платежные параметры совпадают с {user_params.get_user_param}'):
-            self.billing_address_params.should(have.exact_texts(user_params.get_user_param))
+        with step(f'Платежные параметры совпадают с {user_params.short_info}'):
+            self.billing_address_params.should(have.exact_texts(user_params.short_info))
 
     def verify_order_list(self, products:List[ProductCard]):
 
