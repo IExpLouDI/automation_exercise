@@ -1,4 +1,5 @@
 import pytest
+from allure import step
 from selene import browser, be
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
@@ -119,8 +120,8 @@ def create_user():
 	)
 
 	user.add_card(user_card)
-
-	return user
+	with step(f'Подготовлена запись класса user - {user}.\n С картой {user.card}'):
+		return user
 
 
 @pytest.fixture(scope='function')
