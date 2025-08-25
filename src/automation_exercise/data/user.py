@@ -46,7 +46,7 @@ class User(Person):
     card: UserCard = None
 
     @property
-    def get_user_param(self):
+    def short_info(self):
         user_gender = 'Mr.' if self.gender == 'male' else 'Mrs.'
         params_list = [
             f'{user_gender} {self.first_name} {self.last_name}',
@@ -59,6 +59,29 @@ class User(Person):
         ]
 
         return params_list
+
+    @property
+    def info(self):
+        user_gender = 'Mr' if self.gender == 'male' else 'Mrs'
+        dict_info = {
+            "name": self.nick_name,
+            "email": self.email,
+            "title": user_gender,
+            "birth_day": self.day,
+            "birth_month": self.month,
+            "birth_year": self.year,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "company": self.company_name,
+            "address1": self.first_address,
+            "address2": self.second_address,
+            "country": self.country,
+            "state": self.state,
+            "city": self.city,
+            "zipcode": self.zipcode
+        }
+
+        return dict_info
 
     def add_card(self, card_data: UserCard):
         self.card = card_data
