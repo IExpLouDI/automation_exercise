@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 from typing import Optional, Dict
 import requests
 
@@ -23,7 +24,7 @@ class AutomationExerciseAPI:
                        'status_code': response.status_code
                        }
 
-            except "Error":
+            except JSONDecodeError:
                 return {'response': response.text,
                         'status_code': response.status_code
                         }
