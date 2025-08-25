@@ -19,15 +19,17 @@ class AutomationExerciseAPI:
             response = self.session.request(method, url, data=data)
 
             try:
-               return response.json()
+               return {'response': response.json(),
+                       'status_code': response.status_code
+                       }
 
             except "Error":
-                return {'text': response.text,
+                return {'response': response.text,
                         'status_code': response.status_code
                         }
 
         except requests.exceptions.RequestException as err:
             response = getattr(err, 'response', None)
-            return {'error': str(err),
+            return {'response': str(err),
                     'status_code': getattr(response, 'status_code', None)
                     }
