@@ -154,3 +154,15 @@ def load_schema():
 	}
 
 	return schemas_paths_dict
+
+@pytest.fixture(scope='function')
+def update_user_params(create_user):
+	new_name = 'Test'
+	new_last_name = 'Test2'
+	param_dict = {
+		'firstname': new_name,
+		'lastname': new_last_name,
+		'email': create_user.email,
+		'password': create_user.password
+	}
+	return param_dict
