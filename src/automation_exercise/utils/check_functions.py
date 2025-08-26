@@ -3,7 +3,7 @@ from allure import step
 from jsonschema import validate
 from selene import browser, be
 
-from automation_exercise.utils.helpers import camel_to_snake_case
+from automation_exercise.utils.helpers import switch_req_key_to_resp_key
 
 
 @step('Проверяем, что открыт сайт https://www.automationexercise.com')
@@ -30,5 +30,5 @@ def check_response_content(response:dict, valid_content:dict) -> None:
 def check_response_message_content(response:dict, wait_params:dict):
     for key in [el for el in wait_params.keys() if el not in ['email', 'password']]:
         with step(f'Проверяем, что {key} = {wait_params.get(key)}'):
-            snake_case_key = camel_to_snake_case(key)
-            assert response.get('response').get('user').get(snake_case_key) == wait_params.get(key)
+            switch_key = switch_req_key_to_resp_key(key)
+            assert response.get('response').get('user').get(switch_key) == wait_params.get(key)
