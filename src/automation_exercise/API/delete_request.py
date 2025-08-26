@@ -8,11 +8,11 @@ from src.automation_exercise.API.automation_exercise_api import AutomationExerci
 class DeleteRequest(AutomationExerciseAPI):
     METHOD_NAME = "DELETE"
 
-    def delete_user_account(self, payload:Dict[str, any]) -> Dict[str, any]:
+    def user_account(self, payload:Dict[str, any]) -> Dict[str, any]:
 
         return self._make_request(self.METHOD_NAME, 'deleteAccount', data=payload)
 
-    def delete_verify_login(self):
+    def verify_login(self):
         return self._make_request(self.METHOD_NAME, 'verifyLogin')
 
 

@@ -19,12 +19,7 @@ class PostRequest(AutomationExerciseAPI):
         payload = {'search_product': name}
         return self._make_request(self.METHOD_NAME, 'searchProduct', data=payload)
 
-    def post_to_verify_login(self, email:str, password:str) -> Dict[str, any]:
-
-        payload = {
-            'email': email,
-            'password': password
-        }
+    def verify_login(self, payload:Dict[str, any]) -> Dict[str, any]:
 
         return  self._make_request(self.METHOD_NAME, 'verifyLogin', data=payload)
 
