@@ -6,37 +6,37 @@ from allure import step
 class TestAllProducts(BaseTestRequests):
 
     def test_valid_schema(self, api_application, load_schema):
-        response_info = api_application.get.get_all_product()
+        response_info = api_application.get.all_product()
         self.validate_response_schema(load_schema['get_all_product_list'], response_info.get('response'))
 
     def test_valid_status_code(self, api_application):
-        response_info = api_application.get.get_all_product()
+        response_info = api_application.get.all_product()
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
 
 class TestAllBrands(BaseTestRequests):
 
     def test_valid_schema(self, api_application, load_schema):
-        response_info = api_application.get.get_all_brand_list()
+        response_info = api_application.get.all_brand_list()
         self.validate_response_schema(load_schema['get_brands_list'], response_info.get('response'))
 
     def test_valid_status_code(self, api_application):
-        response_info = api_application.get.get_all_brand_list()
+        response_info = api_application.get.all_brand_list()
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
 
 class TestUserAccountDetail(BaseTestRequests):
 
     def test_valid_schema(self, api_application, load_schema, create_user, create_account):
-        response_info = api_application.get.get_user_account_detail_by_email(create_user.email)
+        response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.validate_response_schema(load_schema['get_user_account_detail'], response_info.get('response'))
 
     def test_valid_status_code(self, api_application, create_user, create_account):
-        response_info = api_application.get.get_user_account_detail_by_email(create_user.email)
+        response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
     def test_with_not_exist_email(self, api_application, create_user):
-        response_info = api_application.get.get_user_account_detail_by_email(create_user.email)
+        response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 404)
 
         with step('Проверка текста бизнес ошибки = Account not found with this email, try another email!'):
@@ -44,7 +44,7 @@ class TestUserAccountDetail(BaseTestRequests):
                 'message') == 'Account not found with this email, try another email!'
 
     def test_with_check_content(self, api_application, create_user, create_account):
-        response_info = api_application.get.get_user_account_detail_by_email(create_user.email)
+        response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
         with step(f'Проверка контента ответа на совпадение с данными пользователя {create_user}'):
