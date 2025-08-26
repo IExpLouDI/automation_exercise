@@ -97,8 +97,3 @@ def post_create_account(user_info:User):
             'nick_name': user_info.nick_name,
             'status': 'exists'
             }
-
-
-if __name__ == '__main__':
-    ass = PostRequest()
-    print(ass.post_search_product('top'))
