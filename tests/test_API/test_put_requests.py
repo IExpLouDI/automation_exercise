@@ -2,6 +2,7 @@ import pytest
 from allure import step
 from automation_exercise.utils.base_test_request import BaseTestRequests
 from automation_exercise.utils.check_functions import check_response_message_content
+from automation_exercise.utils.static_values import StatusMessage
 
 
 class TestAllBrandList(BaseTestRequests):
@@ -25,9 +26,9 @@ class TestUpdateUserAccount(BaseTestRequests):
 
 		self.check_response_status_and_message_business_code(response_info, 200, 200)
 
-		with step('Проверка текста сообщения успешного обновления = User updated!'):
+		with step(f'Проверка текста сообщения успешного обновления = {StatusMessage.put_user_update.value}'):
 			assert response_info.get('response').get(
-					'message') == 'User updated!'
+					'message') == StatusMessage.put_user_update.value
 
 	def test_check_user_after_update(self, api_application, create_user, update_user_params, create_account):
 		with step(f'Выполняем запрос'):
@@ -48,9 +49,9 @@ class TestUpdateUserAccount(BaseTestRequests):
 
 		self.check_response_status_and_message_business_code(response_info, 200, 400)
 
-		with step('Проверка текста бизнес ошибки = Bad request, email parameter is missing in PUT request.'):
+		with step(f'Проверка текста бизнес ошибки = {StatusMessage.bad_request_missing_email("put")}'):
 			assert response_info.get('response').get(
-					'message') == 'Bad request, email parameter is missing in PUT request.'
+					'message') == StatusMessage.bad_request_missing_email("put")
 
 	def test_update_without_password(self, api_application, create_user, update_user_params, create_account):
 		update_user_params.pop('password')
@@ -59,9 +60,9 @@ class TestUpdateUserAccount(BaseTestRequests):
 
 		self.check_response_status_and_message_business_code(response_info, 200, 400)
 
-		with step('Проверка текста бизнес ошибки = Bad request, password parameter is missing in PUT request.'):
+		with step(f'Проверка текста бизнес ошибки = {StatusMessage.bad_request_missing_password("put")}'):
 			assert response_info.get('response').get(
-					'message') == 'Bad request, password parameter is missing in PUT request.'
+					'message') == StatusMessage.bad_request_missing_password("put")
 
 	def test_with_not_exist_email(self, api_application, update_user_params):
 		with step(f'Выполняем запрос'):
@@ -69,9 +70,9 @@ class TestUpdateUserAccount(BaseTestRequests):
 
 		self.check_response_status_and_message_business_code(response_info, 200, 404)
 
-		with step('Проверка текста бизнес ошибки = Account not found!'):
+		with step(f'Проверка текста бизнес ошибки = {StatusMessage.put_account_not_found.value}'):
 			assert response_info.get('response').get(
-				'message') == 'Account not found!'
+				'message') == StatusMessage.put_account_not_found.value
 
 	def test_without_update_params(self, api_application, create_user, update_user_params, create_account):
 		with step(f'Оставляем обязательные параметры для идентификации пользователя'):

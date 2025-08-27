@@ -10,6 +10,7 @@ class Country(Enum):
     new_zealand = 'New Zealand'
     india = 'India'
 
+
 class Months(Enum):
     january = '1',
     february = '2',
@@ -23,3 +24,19 @@ class Months(Enum):
     october = '10',
     november = '11',
     december = '12'
+
+
+class StatusMessage(Enum):
+    get_account_not_found = 'Account not found with this email, try another email!'
+    put_user_update = 'User updated!'
+    put_account_not_found = 'Account not found!'
+    del_account_deleted = 'Account deleted!'
+    del_user_not_found = 'User not found!'
+
+    @classmethod
+    def bad_request_missing_email(cls, method:str) -> str:
+        return f'Bad request, email parameter is missing in {method.upper()} request.'
+
+    @classmethod
+    def bad_request_missing_password(cls, method:str) -> str:
+        return f'Bad request, password parameter is missing in {method.upper()} request.'

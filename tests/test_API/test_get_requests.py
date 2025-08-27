@@ -2,6 +2,8 @@ from automation_exercise.utils.base_test_request import BaseTestRequests
 from automation_exercise.utils.check_functions import check_response_content
 from allure import step
 
+from automation_exercise.utils.static_values import StatusMessage
+
 
 class TestAllProducts(BaseTestRequests):
 
@@ -39,9 +41,9 @@ class TestUserAccountDetail(BaseTestRequests):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 404)
 
-        with step('Проверка текста бизнес ошибки = Account not found with this email, try another email!'):
+        with step(f'Проверка текста бизнес ошибки = {StatusMessage.get_account_not_found.value}'):
             assert response_info.get('response').get(
-                'message') == 'Account not found with this email, try another email!'
+                'message') == StatusMessage.get_account_not_found.value
 
     def test_with_check_content(self, api_application, create_user, create_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
