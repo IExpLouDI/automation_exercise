@@ -155,6 +155,7 @@ def load_schema():
 
 	return schemas_paths_dict
 
+
 @pytest.fixture(scope='function')
 def update_user_params(create_user):
 	new_name = 'Test'
@@ -166,3 +167,29 @@ def update_user_params(create_user):
 		'password': create_user.password
 	}
 	return param_dict
+
+
+@pytest.fixture(scope='function')
+def search_param():
+	return {'search_product': 'blue top'}
+
+
+@pytest.fixture(scope='function')
+def no_valid_search_param():
+	return {'bad_param': None}
+
+
+@pytest.fixture(scope='function')
+def product_content():
+	return {
+		"id": 1,
+		"name": "Blue Top",
+		"price": "Rs. 500",
+		"brand": "Polo",
+		"category": {
+			"usertype": {
+				"usertype": "Women"
+			},
+			"category": "Tops"
+		}
+	}

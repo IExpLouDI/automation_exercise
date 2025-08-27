@@ -20,7 +20,7 @@ class TestAllBrands(BaseTestRequests):
 
     def test_valid_schema(self, api_application, load_schema):
         response_info = api_application.get.all_brand_list()
-        self.validate_response_schema(load_schema['get_brands_list'], response_info.get('response'))
+        self.validate_response_schema(load_schema.get('get_brands_list'), response_info.get('response'))
 
     def test_valid_status_code(self, api_application):
         response_info = api_application.get.all_brand_list()

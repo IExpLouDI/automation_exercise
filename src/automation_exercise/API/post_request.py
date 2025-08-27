@@ -10,20 +10,19 @@ class PostRequest(AutomationExerciseAPI):
     METHOD_NAME = 'POST'
 
 
-    def post_all_product(self):
+    def product_list(self):
         """Method is not supported."""
         return self._make_request(self.METHOD_NAME, 'productsList')
 
-    def post_search_product(self, name:str) -> Dict[str, any]:
+    def search_product(self, payload:Dict[str, any]) -> Dict[str, any]:
 
-        payload = {'search_product': name}
         return self._make_request(self.METHOD_NAME, 'searchProduct', data=payload)
 
     def verify_login(self, payload:Dict[str, any]) -> Dict[str, any]:
 
         return  self._make_request(self.METHOD_NAME, 'verifyLogin', data=payload)
 
-    def post_create_user_account(self, user_info:User) -> Dict[str, any]:
+    def create_account(self, user_info:User) -> Dict[str, any]:
         map_gender = 'Mr' if user_info.gender.lower() == 'male' else 'Mrs'
 
         payload = {

@@ -32,6 +32,7 @@ class StatusMessage(Enum):
     put_account_not_found = 'Account not found!'
     del_account_deleted = 'Account deleted!'
     del_user_not_found = 'User not found!'
+    post_missing_search_param = 'Bad request, search_product parameter is missing in POST request.'
 
     @classmethod
     def bad_request_missing_email(cls, method:str) -> str:
