@@ -1,3 +1,4 @@
+import pytest
 from allure import step
 
 from automation_exercise.utils.base_test_request import BaseTestRequests
@@ -46,3 +47,11 @@ class TestUserAccount(BaseTestRequests):
         with step(f'Проверка текста бизнес ошибки = {StatusMessage.bad_request_missing_password("DELETE")}'):
             assert response_info.get('response').get(
 					'message') == StatusMessage.bad_request_missing_password("DELETE")
+
+
+class TestVerifyLogin(BaseTestRequests):
+
+    @pytest.mark.xfail(reason='Метод находится в разработке')
+    def test_valid_status_code(self, api_application):
+        response_info = api_application.delete.verify_login()
+        self.check_response_status_and_message_business_code(response_info, 200, 200)
