@@ -28,7 +28,7 @@ class TestUserAccount(BaseTestRequests):
 
         with step(f'Проверяем что пользователь не существует'):
             assert user_deleted_info.get('response').get(
-                'message') == StatusMessage.del_user_not_found.value
+                'message') == StatusMessage.user_not_found.value
 
     def test_delete_without_email(self, api_application, create_account):
         create_account.pop('email')

@@ -180,6 +180,11 @@ def no_valid_search_param():
 
 
 @pytest.fixture(scope='function')
+def not_found_user(create_user):
+	return {'email': create_user.email, 'password': create_user.password}
+
+
+@pytest.fixture(scope='function')
 def product_content():
 	return {
 		"id": 1,

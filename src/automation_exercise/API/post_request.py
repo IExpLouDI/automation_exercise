@@ -15,11 +15,9 @@ class PostRequest(AutomationExerciseAPI):
         return self._make_request(self.METHOD_NAME, 'productsList')
 
     def search_product(self, payload:Dict[str, any]) -> Dict[str, any]:
-
         return self._make_request(self.METHOD_NAME, 'searchProduct', data=payload)
 
     def verify_login(self, payload:Dict[str, any]) -> Dict[str, any]:
-
         return  self._make_request(self.METHOD_NAME, 'verifyLogin', data=payload)
 
     def create_account(self, user_info:User) -> Dict[str, any]:
