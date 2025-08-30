@@ -102,7 +102,6 @@ class TestVerifyLogin(BaseTestRequests):
             assert response_info.get('response').get('message') == StatusMessage.post_bad_request.value
 
 
-# @pytest.mark.skip
 class TestCreateAccount(BaseTestRequests):
 
     def test_successful_account_creation(self, api_application, create_user):
