@@ -94,7 +94,7 @@ def create_user():
 	"""Создание пользователя для регистрации"""
 	user = User(
 		nick_name='Testovich',
-		email='T2@test.com',
+		email='testov2_qaguru@test.com',
 		password='Qwe123',
 		company_name='Trevor Corporation',
 		country=Country.india.value,
@@ -125,7 +125,7 @@ def create_user():
 
 
 @pytest.fixture(scope='function')
-def create_account(create_user):
+def create_user_account(create_user):
 	"""Создаёт пользователя и по окончанию теста - удаляет"""
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)

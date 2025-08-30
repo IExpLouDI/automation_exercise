@@ -45,3 +45,7 @@ class StatusMessage(Enum):
     @classmethod
     def bad_request_missing_password(cls, method:str) -> str:
         return f'Bad request, password parameter is missing in {method.upper()} request.'
+
+    @classmethod
+    def bad_request_missing_param(cls, param:str,  method:str) -> str:
+        return f'Bad request, {param} parameter is missing in {method} request.'
