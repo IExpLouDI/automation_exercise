@@ -1,9 +1,8 @@
-from src.automation_exercise.app import Application
 from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_deleted
 from allure import step
 
 
-def test_user_login_with_correct_email_passw(setup_remote_browser, create_account, application):
+def test_user_login_with_correct_email_passw(setup_remote_browser, create_user_account, application):
 	with step('Проверяем что открыта домашняя страница'):
 		check_website_is_open()
 
@@ -15,13 +14,13 @@ def test_user_login_with_correct_email_passw(setup_remote_browser, create_accoun
 
 	with step('Вводим данные пользователя в форму авторизации'):
 		(application.signup_login_page
-		 .type_email(create_account['email'], is_login=True)
-		 .type_password(create_account['password'])
+		 .type_email(create_user_account['email'], is_login=True)
+		 .type_password(create_user_account['password'])
 		 .pres_button_login()
 		 )
 
 	with step('Проверяем, что выполнен вход в аккаунт пользователем'):
-		application.navigation_bar.check_user_is_login(create_account["nick_name"])
+		application.navigation_bar.check_user_is_login(create_user_account["nick_name"])
 
 	with step('Удаление пользователя'):
 		application.navigation_bar.click_delete_user()
@@ -49,19 +48,19 @@ def test_user_login_with_no_correct_email_passw(setup_remote_browser, applicatio
 		application.signup_login_page.verify_incorrect_email_pass()
 
 
-def test_user_logout(setup_remote_browser, create_account, application):
+def test_user_logout(setup_remote_browser, create_user_account, application):
 	with step('Переходим в окно авторизации'):
 		application.navigation_bar.open_login_page()
 
 	with step('Выполняем вход в аккаунт'):
 		(application.signup_login_page
-		 .type_email(create_account['email'], is_login=True)
-		 .type_password(create_account['password'])
+		 .type_email(create_user_account['email'], is_login=True)
+		 .type_password(create_user_account['password'])
 		 .pres_button_login()
 		 )
 
 	with step('Проверяем, что выполнен вход в аккаунт пользователем'):
-		application.navigation_bar.check_user_is_login(create_account['nick_name'])
+		application.navigation_bar.check_user_is_login(create_user_account['nick_name'])
 
 	with step('Проверяем, что выполнен вход в аккаунт пользователем'):
 		application.navigation_bar.click_logout()

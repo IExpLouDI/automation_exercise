@@ -45,11 +45,11 @@ def test_verify_product_quantity_in_cart(setup_remote_browser, application, prod
 		application.cart_page.check_product_in_cart([test_product])
 
 
-def test_remove_products_from_cart(setup_remote_browser, application, create_account, products_list):
+def test_remove_products_from_cart(setup_remote_browser, application, create_user_account, products_list):
 	with step('Авторизация и переход на страницу с товарами'):
 		application.navigation_bar.open_login_page()
-		application.signup_login_page.type_email(create_account["email"], is_login=True)
-		application.signup_login_page.type_password(create_account['password'])
+		application.signup_login_page.type_email(create_user_account["email"], is_login=True)
+		application.signup_login_page.type_password(create_user_account['password'])
 		application.signup_login_page.pres_button_login()
 
 		application.navigation_bar.open_products_page()

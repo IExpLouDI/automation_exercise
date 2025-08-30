@@ -1,4 +1,5 @@
 import pytest
+from allure import step
 from selene import browser, be
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
@@ -9,12 +10,12 @@ import os
 from selenium.webdriver.remote.remote_connection import RemoteConnection
 
 from src.automation_exercise.API.delete_request import delete_account
-from src.automation_exercise.app import Application
+from src.automation_exercise.app import UIManager, APIManager
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
 from src.automation_exercise.utils.attachments import add_video
+from src.automation_exercise.utils.paths import schemas_dir
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User, UserCard
-
 from src.automation_exercise.API.post_request import post_create_account
 
 
@@ -71,7 +72,7 @@ def setup_remote_browser():
 
 @pytest.fixture()
 def application():
-	app = Application()
+	app = UIManager()
 	return app
 
 
@@ -93,7 +94,7 @@ def create_user():
 	"""Создание пользователя для регистрации"""
 	user = User(
 		nick_name='Testovich',
-		email='T2@test.com',
+		email='testov2_qaguru@test.com',
 		password='Qwe123',
 		company_name='Trevor Corporation',
 		country=Country.india.value,
@@ -119,12 +120,12 @@ def create_user():
 	)
 
 	user.add_card(user_card)
-
-	return user
+	with step(f'Подготовлена запись класса user - {user}.\n С картой {user.card}'):
+		return user
 
 
 @pytest.fixture(scope='function')
-def create_account(create_user):
+def create_user_account(create_user):
 	"""Создаёт пользователя и по окончанию теста - удаляет"""
 	yield post_create_account(create_user)
 	delete_account(create_user.email, create_user.password)
@@ -137,3 +138,63 @@ def products_list():
 
 	for product in products:
 		product.reset_quantity()
+
+
+@pytest.fixture(scope='function')
+def api_application():
+	return APIManager()
+
+@pytest.fixture(scope='function')
+def load_schema():
+	schemas_paths_dict = {
+		'get_all_product_list': os.path.join(schemas_dir, 'schemas_get_all_products_list.json'),
+		'post_search_product': os.path.join(schemas_dir, 'schema_post_search_product.json'),
+		'get_user_account_detail': os.path.join(schemas_dir, 'schema_get_user_account_detail.json'),
+		'get_brands_list': os.path.join(schemas_dir, 'schema_get_brands_list.json')
+	}
+
+	return schemas_paths_dict
+
+
+@pytest.fixture(scope='function')
+def update_user_params(create_user):
+	new_name = 'Test'
+	new_last_name = 'Test2'
+	param_dict = {
+		'firstname': new_name,
+		'lastname': new_last_name,
+		'email': create_user.email,
+		'password': create_user.password
+	}
+	return param_dict
+
+
+@pytest.fixture(scope='function')
+def search_param():
+	return {'search_product': 'blue top'}
+
+
+@pytest.fixture(scope='function')
+def no_valid_search_param():
+	return {'bad_param': None}
+
+
+@pytest.fixture(scope='function')
+def not_found_user(create_user):
+	return {'email': create_user.email, 'password': create_user.password}
+
+
+@pytest.fixture(scope='function')
+def product_content():
+	return {
+		"id": 1,
+		"name": "Blue Top",
+		"price": "Rs. 500",
+		"brand": "Polo",
+		"category": {
+			"usertype": {
+				"usertype": "Women"
+			},
+			"category": "Tops"
+		}
+	}
