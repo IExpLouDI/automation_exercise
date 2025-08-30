@@ -20,30 +20,41 @@ class PostRequest(AutomationExerciseAPI):
     def verify_login(self, payload:Dict[str, any]) -> Dict[str, any]:
         return  self._make_request(self.METHOD_NAME, 'verifyLogin', data=payload)
 
-    def create_account(self, user_info:User) -> Dict[str, any]:
-        map_gender = 'Mr' if user_info.gender.lower() == 'male' else 'Mrs'
+    def create_account(self, user_info: Dict[str, any]) -> Dict[str, any]:
+        payload = {}
 
-        payload = {
-            'title': map_gender,
-            'name': user_info.nick_name,
-            'password': user_info.password,
-            'birth_date': user_info.day,
-            'birth_month': user_info.month,
-            'birth_year': user_info.year,
-            'newsletter': '1',
-            'optin': '1',
-            'firstname': user_info.first_name,
-            'lastname': user_info.last_name,
-            'company': user_info.company_name,
-            'address1': user_info.first_address,
-            'address2': user_info.second_address,
-            'country': user_info.country,
-            'state': user_info.state,
-            'city': user_info.city,
-            'zipcode': user_info.zipcode,
-            'mobile_number': user_info.mobile_number,
-            'email': user_info.email
+        # Обработка поля gender
+        if 'gender' in user_info and user_info['gender']:
+            payload['title'] = 'Mr' if user_info['gender'].lower() == 'male' else 'Mrs'
+
+        # Маппинг полей из user_info в payload
+        field_mapping = {
+            'nick_name': 'name',
+            'password': 'password',
+            'email': 'email',
+            'day': 'birth_date',
+            'month': 'birth_month',
+            'year': 'birth_year',
+            'first_name': 'firstname',
+            'last_name': 'lastname',
+            'company_name': 'company',
+            'first_address': 'address1',
+            'second_address': 'address2',
+            'country': 'country',
+            'state': 'state',
+            'city': 'city',
+            'zipcode': 'zipcode',
+            'mobile_number': 'mobile_number'
         }
+
+        # Добавляем поля в payload, если они существуют в user_info
+        for user_attr, payload_key in field_mapping.items():
+            if user_attr in user_info and user_info[user_attr] is not None:
+                payload[payload_key] = user_info[user_attr]
+
+        # Обработка флагов (со значениями по умолчанию, если не указаны)
+        payload['newsletter'] = '1' if user_info.get('want_newslater', True) else '0'
+        payload['optin'] = '1' if user_info.get('want_special_offer', True) else '0'
 
         return self._make_request("POST", "createAccount", data=payload)
 
