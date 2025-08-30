@@ -1,4 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
+from typing import List, Dict
+
 from src.automation_exercise.utils.static_values import Country, Months
 
 
@@ -46,7 +48,7 @@ class User(Person):
     card: UserCard = None
 
     @property
-    def short_info(self):
+    def short_info(self) -> List[str]:
         user_gender = 'Mr.' if self.gender == 'male' else 'Mrs.'
         params_list = [
             f'{user_gender} {self.first_name} {self.last_name}',
@@ -61,7 +63,7 @@ class User(Person):
         return params_list
 
     @property
-    def info(self):
+    def info(self) -> Dict[str, any]:
         user_gender = 'Mr' if self.gender == 'male' else 'Mrs'
         dict_info = {
             "name": self.nick_name,
@@ -82,6 +84,10 @@ class User(Person):
         }
 
         return dict_info
+
+    @property
+    def class_property(self) -> Dict[str, any]:
+        return asdict(self)
 
     def add_card(self, card_data: UserCard):
         self.card = card_data
