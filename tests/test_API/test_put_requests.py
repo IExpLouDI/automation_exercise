@@ -15,12 +15,12 @@ class TestAllBrandList(BaseTestRequests):
 
 class TestUpdateUserAccount(BaseTestRequests):
 
-	def test_valid_status_code(self, api_application, create_user, update_user_params, create_account):
+	def test_valid_status_code(self, api_application, create_user, update_user_params, create_user_account):
 		with step(f'Выполняем запрос'):
 			response_info = api_application.put.update_user_account(update_user_params)
 		self.check_response_status_and_message_business_code(response_info, 200, 200)
 
-	def test_verify_response_message(self, api_application, create_user, update_user_params, create_account):
+	def test_verify_response_message(self, api_application, create_user, update_user_params, create_user_account):
 		with step(f'Выполняем запрос'):
 			response_info = api_application.put.update_user_account(update_user_params)
 
@@ -30,7 +30,7 @@ class TestUpdateUserAccount(BaseTestRequests):
 			assert response_info.get('response').get(
 					'message') == StatusMessage.put_user_update.value
 
-	def test_check_user_after_update(self, api_application, create_user, update_user_params, create_account):
+	def test_check_user_after_update(self, api_application, create_user, update_user_params, create_user_account):
 		with step(f'Выполняем запрос'):
 			response_info = api_application.put.update_user_account(update_user_params)
 
@@ -42,7 +42,7 @@ class TestUpdateUserAccount(BaseTestRequests):
 		with step('Проверяем изменённые параметры пользователя'):
 			check_response_message_content(account_info, update_user_params)
 
-	def test_update_without_email(self, api_application, create_user, update_user_params, create_account):
+	def test_update_without_email(self, api_application, create_user, update_user_params, create_user_account):
 		update_user_params.pop('email')
 		with step(f'Выполняем запрос'):
 			response_info = api_application.put.update_user_account(update_user_params)
@@ -53,7 +53,7 @@ class TestUpdateUserAccount(BaseTestRequests):
 			assert response_info.get('response').get(
 					'message') == StatusMessage.bad_request_missing_email("put")
 
-	def test_update_without_password(self, api_application, create_user, update_user_params, create_account):
+	def test_update_without_password(self, api_application, create_user, update_user_params, create_user_account):
 		update_user_params.pop('password')
 		with step(f'Выполняем запрос'):
 			response_info = api_application.put.update_user_account(update_user_params)
@@ -74,7 +74,7 @@ class TestUpdateUserAccount(BaseTestRequests):
 			assert response_info.get('response').get(
 				'message') == StatusMessage.put_account_not_found.value
 
-	def test_without_update_params(self, api_application, create_user, update_user_params, create_account):
+	def test_without_update_params(self, api_application, create_user, update_user_params, create_user_account):
 		with step(f'Оставляем обязательные параметры для идентификации пользователя'):
 			for key in update_user_params.copy().keys():
 				if key in ['email', 'password']:

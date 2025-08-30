@@ -116,7 +116,7 @@ def test_create_order_after_user_registration(setup_remote_browser, application,
         check_account_is_deleted()
 
 
-def test_create_order_after_user_login(setup_remote_browser, application, products_list, create_account, create_user):
+def test_create_order_after_user_login(setup_remote_browser, application, products_list, create_user_account, create_user):
 
     with step(f'Выполняем вход пользователем {create_user}'):
         application.navigation_bar.open_login_page()

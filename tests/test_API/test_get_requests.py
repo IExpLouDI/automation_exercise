@@ -29,11 +29,11 @@ class TestAllBrands(BaseTestRequests):
 
 class TestUserAccountDetail(BaseTestRequests):
 
-    def test_valid_schema(self, api_application, load_schema, create_user, create_account):
+    def test_valid_schema(self, api_application, load_schema, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.validate_response_schema(load_schema['get_user_account_detail'], response_info.get('response'))
 
-    def test_valid_status_code(self, api_application, create_user, create_account):
+    def test_valid_status_code(self, api_application, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
@@ -45,7 +45,7 @@ class TestUserAccountDetail(BaseTestRequests):
             assert response_info.get('response').get(
                 'message') == StatusMessage.get_account_not_found.value
 
-    def test_with_check_content(self, api_application, create_user, create_account):
+    def test_with_check_content(self, api_application, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 

@@ -61,7 +61,7 @@ def test_user_registration(setup_remote_browser, create_user, application):
         check_account_is_deleted()
 
 
-def test_registration_user_with_existing_email(setup_remote_browser, create_user, create_account, application):
+def test_registration_user_with_existing_email(setup_remote_browser, create_user, create_user_account, application):
 
     with step('Открываем форму авторизации/регистрации'):
         application.navigation_bar.open_login_page()
