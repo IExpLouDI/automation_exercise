@@ -145,16 +145,16 @@ class TestCreateAccount(BaseTestRequests):
 
     @pytest.mark.parametrize('field', ['company_name', 'want_newslater', 'second_address', 'want_special_offer'])
     def test_account_creation_missing_optional_field(self, api_application, create_user, field):
-        setattr(create_user, field, None)
+        with step(f'Удаляем опциональный параметр - {field}'):
+            user_info = create_user.class_property.copy()
+            user_info.pop(field)
 
         with step(f'Cоздаём аккаунт без опционального поля - {field}'):
-            response_info = api_application.post.create_account(create_user)
+            response_info = api_application.post.create_account(user_info)
 
         with step('Проверяем код ответа и сообщение создания пользователя'):
-            self.check_response_status_and_message_business_code(response_info,
-                                                                 200,
-                                                                 201)
-            assert response_info.get('status_code') == 201
+            self.check_response_status_and_message_business_code(response_info, 200, 201)
+            assert response_info.get('response').get('message') == StatusMessage.post_user_created.value
 
         with step(f'Удаляем созданного пользователя'):
             api_application.delete.user_account({'email': create_user.email,
