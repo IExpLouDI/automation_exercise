@@ -88,6 +88,7 @@ def setup_browser():
 
 	browser.quit()
 
+# Алматинская 72а, 18 сентября в 9:00
 
 @pytest.fixture(scope='function')
 def create_user():

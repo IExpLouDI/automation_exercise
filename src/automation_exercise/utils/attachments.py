@@ -1,6 +1,52 @@
+import json
+
 import allure
+import requests
 from allure_commons.types import AttachmentType
 
+
+class AllureSession(requests.Session):
+
+    def __init__(self):
+        super().__init__()
+        self.request_data = {}
+
+    def send(self, request, **kwargs):
+        self.request_data = {
+            'method': request.method,
+            'url': request.url,
+            'headers': dict(request.headers),
+            'body': request.body
+        }
+
+        response = super().send(request, **kwargs)
+
+        request_text = (
+            f"Request Method: {self.request_data.get('method', 'UNKNOWN')}\n"
+            f"Request URL: {self.request_data.get('url', 'UNKNOWN')}\n"
+            f"Request Headers: {self.request_data.get('headers', {})}\n"
+            f"Request Body: {self.request_data.get('body', '')}\n\n"
+        )
+
+        response_text = (
+            f"Response Status: {response.status_code}\n"
+            f"Response Body: {response.text}"
+        )
+
+        allure.attach(
+            body=request_text,
+            name=f"Request: {self.request_data.get('method')} {self.request_data.get('url')}",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+        allure.attach(
+            body=response_text,
+            name=f"Response: {response.status_code}",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+        self.request_data = {}
+        return response
 
 def add_video(browser):
     video_url = (
