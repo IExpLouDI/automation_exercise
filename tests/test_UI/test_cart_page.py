@@ -1,6 +1,15 @@
+import allure
 from allure import step
+from allure_commons.types import Severity
 
 
+@allure.id('01_CART_PAGE')
+@allure.tag('UI', 'CART_PAGE')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('CART_PAGE')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_add_product_in_cart_from_product_page(setup_remote_browser, application, products_list):
 	with step(f'Открываем вкладку продуктов и делаем скролл вниз'):
 		application.navigation_bar.open_products_page()
@@ -22,6 +31,13 @@ def test_add_product_in_cart_from_product_page(setup_remote_browser, application
 		application.cart_page.check_product_in_cart(products_list)
 
 
+@allure.id('02_CART_PAGE')
+@allure.tag('UI', 'CART_PAGE')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('CART_PAGE')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_verify_product_quantity_in_cart(setup_remote_browser, application, products_list):
 	test_product = products_list[0]
 	test_product.set_quantity(4)
@@ -45,6 +61,13 @@ def test_verify_product_quantity_in_cart(setup_remote_browser, application, prod
 		application.cart_page.check_product_in_cart([test_product])
 
 
+@allure.id('03_CART_PAGE')
+@allure.tag('UI', 'CART_PAGE')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('CART_PAGE')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_remove_products_from_cart(setup_remote_browser, application, create_user_account, products_list):
 	with step('Авторизация и переход на страницу с товарами'):
 		application.navigation_bar.open_login_page()

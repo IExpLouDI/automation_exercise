@@ -1,3 +1,6 @@
+import allure
+from allure_commons.types import Severity
+
 from automation_exercise.utils.base_test_request import BaseTestRequests
 from automation_exercise.utils.check_functions import check_response_content
 from allure import step
@@ -7,10 +10,24 @@ from automation_exercise.utils.static_values import StatusMessage
 
 class TestAllProducts(BaseTestRequests):
 
+    @allure.id('01_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_schema(self, api_application, load_schema):
         response_info = api_application.get.all_product()
         self.validate_response_schema(load_schema['get_all_product_list'], response_info.get('response'))
 
+    @allure.id('02_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_status_code(self, api_application):
         response_info = api_application.get.all_product()
         self.check_response_status_and_message_business_code(response_info, 200, 200)
@@ -18,10 +35,24 @@ class TestAllProducts(BaseTestRequests):
 
 class TestAllBrands(BaseTestRequests):
 
+    @allure.id('03_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_schema(self, api_application, load_schema):
         response_info = api_application.get.all_brand_list()
         self.validate_response_schema(load_schema.get('get_brands_list'), response_info.get('response'))
 
+    @allure.id('04_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_status_code(self, api_application):
         response_info = api_application.get.all_brand_list()
         self.check_response_status_and_message_business_code(response_info, 200, 200)
@@ -29,14 +60,35 @@ class TestAllBrands(BaseTestRequests):
 
 class TestUserAccountDetail(BaseTestRequests):
 
+    @allure.id('05_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_schema(self, api_application, load_schema, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.validate_response_schema(load_schema['get_user_account_detail'], response_info.get('response'))
 
+    @allure.id('06_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_status_code(self, api_application, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
+    @allure.id('07_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_with_not_exist_email(self, api_application, create_user):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 404)
@@ -45,6 +97,13 @@ class TestUserAccountDetail(BaseTestRequests):
             assert response_info.get('response').get(
                 'message') == StatusMessage.get_account_not_found.value
 
+    @allure.id('08_GET_REQUEST')
+    @allure.tag('API', 'GET')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('GET')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_with_check_content(self, api_application, create_user, create_user_account):
         response_info = api_application.get.user_account_detail_by_email(create_user.email)
         self.check_response_status_and_message_business_code(response_info, 200, 200)

@@ -2,12 +2,14 @@ from json import JSONDecodeError
 from typing import Optional, Dict
 import requests
 
+from automation_exercise.utils.attachments import AllureSession
+
 
 class AutomationExerciseAPI:
     BASE_URL = 'https://automationexercise.com/api'
 
     def __init__(self):
-        self.session = requests.Session()
+        self.session = AllureSession()
         self.session.headers.update({
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -15,7 +17,6 @@ class AutomationExerciseAPI:
 
     def _make_request(self, method: str, end_point:str, data: Optional[Dict[str, any]] = None) -> dict:
         url = f'{self.BASE_URL}/{end_point}'
-
         try:
             response = self.session.request(method, url, data=data)
 

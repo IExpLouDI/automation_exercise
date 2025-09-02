@@ -1,8 +1,18 @@
+import allure
 from allure import step
+from allure_commons.types import Severity
+
 from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_create
 from src.automation_exercise.utils.check_functions import check_account_is_deleted
 
 
+@allure.id('01_USER_REGISTRATION')
+@allure.tag('UI', 'USER_REGISTRATION')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('USER_REGISTRATION')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_user_registration(setup_remote_browser, create_user, application):
 
     check_website_is_open()
@@ -61,6 +71,13 @@ def test_user_registration(setup_remote_browser, create_user, application):
         check_account_is_deleted()
 
 
+@allure.id('02_USER_REGISTRATION')
+@allure.tag('UI', 'USER_REGISTRATION')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('USER_REGISTRATION')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_registration_user_with_existing_email(setup_remote_browser, create_user, create_user_account, application):
 
     with step('Открываем форму авторизации/регистрации'):

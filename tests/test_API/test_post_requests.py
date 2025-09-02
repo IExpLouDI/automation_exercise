@@ -1,5 +1,7 @@
+import allure
 import pytest
 from allure import step
+from allure_commons.types import Severity
 
 from automation_exercise.utils.base_test_request import BaseTestRequests
 from automation_exercise.utils.helpers import switch_search_param_case, switch_resp_key_to_req_key
@@ -8,26 +10,52 @@ from tests.conftest import api_application
 
 
 class TestProductsList(BaseTestRequests):
+    @allure.id('01_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.MINOR)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     @pytest.mark.xfail(reason='Метод находится в разработке')
     def test_valid_status_code(self, api_application):
         response_info = api_application.post.product_list()
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
 
-class TestSearchProduct(BaseTestRequests):
 
+class TestSearchProduct(BaseTestRequests):
+    @allure.id('02_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_status_code(self, api_application, search_param):
         with step(f'Выполняем запрос'):
             response_info = api_application.post.search_product(search_param)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
-
+    @allure.id('03_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_verify_response_schema(self, api_application, load_schema, search_param):
         with step(f'Выполняем запрос'):
             response_info = api_application.post.search_product(search_param)
         self.validate_response_schema(load_schema.get('post_search_product'), response_info.get('response'))
 
-
+    @allure.id('04_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_without_search_param(self, api_application, no_valid_search_param):
         with step(f'Выполняем запрос'):
             response_info = api_application.post.search_product(no_valid_search_param)
@@ -39,6 +67,13 @@ class TestSearchProduct(BaseTestRequests):
                 'message') == StatusMessage.post_missing_search_param.value
 
 
+    @allure.id('05_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_parameter_is_not_case_sensitive(self, api_application, search_param):
         with step(f'Выполняем запрос c {search_param}'):
             response_info = api_application.post.search_product(search_param)
@@ -61,10 +96,25 @@ class TestSearchProduct(BaseTestRequests):
 
 class TestVerifyLogin(BaseTestRequests):
 
+
+    @allure.id('06_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_valid_status_code(self, api_application, create_user_account):
         response_info = api_application.post.verify_login(create_user_account)
         self.check_response_status_and_message_business_code(response_info, 200, 200)
 
+    @allure.id('07_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_verify_user_exists(self, api_application, create_user_account):
         with step(f'Выполняем запрос c {create_user_account}'):
             response_info = api_application.post.verify_login(create_user_account)
@@ -73,6 +123,13 @@ class TestVerifyLogin(BaseTestRequests):
         with step(f'Проверяем, что сообщение в ответе = {StatusMessage.post_verify_user_exists.value}'):
             assert response_info.get('response').get('message') == StatusMessage.post_verify_user_exists.value
 
+    @allure.id('08_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_verify_user_not_found(self, api_application, not_found_user):
         with step(f'Выполняем запрос c {not_found_user}'):
             response_info = api_application.post.verify_login(not_found_user)
@@ -81,6 +138,13 @@ class TestVerifyLogin(BaseTestRequests):
         with step(f'Проверяем, что сообщение в ответе = {StatusMessage.user_not_found.value}'):
             assert response_info.get('response').get('message') == StatusMessage.user_not_found.value
 
+    @allure.id('09_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_without_email(self, api_application, create_user_account):
         create_user_account.pop('email')
         with step(f'Выполняем запрос c {create_user_account}'):
@@ -91,6 +155,13 @@ class TestVerifyLogin(BaseTestRequests):
         with step(f'Проверяем, что сообщение в ответе = {StatusMessage.post_verify_user_exists.value}'):
             assert response_info.get('response').get('message') == StatusMessage.post_bad_request.value
 
+    @allure.id('10_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_without_password(self, api_application, create_user_account):
         create_user_account.pop('password')
         with step(f'Выполняем запрос c {create_user_account}'):
@@ -104,11 +175,18 @@ class TestVerifyLogin(BaseTestRequests):
 
 class TestCreateAccount(BaseTestRequests):
 
+    @allure.id('11_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.NORMAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_successful_account_creation(self, api_application, create_user):
         with step('Создаем аккаунт через API'):
             response_info = api_application.post.create_account(create_user.class_property)
 
-        with step('Проверяем код ответа и сообщение'):
+        with step(f'Проверяем код ответа и сообщение в ответе = {StatusMessage.post_user_created.value}'):
             self.check_response_status_and_message_business_code(response_info, 200, 201)
             assert response_info.get('response').get('message') == StatusMessage.post_user_created.value
 
@@ -117,6 +195,13 @@ class TestCreateAccount(BaseTestRequests):
                                                  'password': create_user.password}
                                                 )
 
+    @allure.id('12_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     def test_account_creation_existing_email(self, api_application, create_user_account, create_user):
         with step('Пытаемся создать аккаунт с существующим email'):
             response_info = api_application.post.create_account(create_user.class_property)
@@ -125,6 +210,13 @@ class TestCreateAccount(BaseTestRequests):
             self.check_response_status_and_message_business_code(response_info, 200, 400)
             assert response_info.get('response').get('message') == StatusMessage.email_exists.value
 
+    @allure.id('13_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.BLOCKER)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     @pytest.mark.parametrize('field',['email', 'nick_name', 'first_name',
                                               'last_name', 'first_address', 'password',
                                               'country', 'state', 'city',
@@ -142,6 +234,13 @@ class TestCreateAccount(BaseTestRequests):
             assert response_info.get('response').get('message') == (StatusMessage
             .bad_request_missing_param(switch_resp_key_to_req_key(field),'POST'))
 
+    @allure.id('14_POST_REQUEST')
+    @allure.tag('API', 'POST')
+    @allure.severity(Severity.CRITICAL)
+    @allure.parent_suite('API')
+    @allure.suite('POST')
+    @allure.label('owner', 'vssuchkov')
+    @allure.link('https://www.automationexercise.com', name='Testing API')
     @pytest.mark.parametrize('field', ['company_name', 'want_newslater', 'second_address', 'want_special_offer'])
     def test_account_creation_missing_optional_field(self, api_application, create_user, field):
         with step(f'Удаляем опциональный параметр - {field}'):
