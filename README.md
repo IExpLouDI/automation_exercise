@@ -84,12 +84,9 @@
 <img title="Allure Tests" src="resources/readme/tests.png">
 </p>
 
-## <img src="images/logo/Allure_TO.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://allure.autotests.cloud/launch/15301">Allure TestOps</a>
+## <img src="resources/readme/icons/Allure_TO.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://allure.autotests.cloud/launch/48029">Allure TestOps</a>
 <p align="center">
 <img title="Allure Overview Dashboard" src="resources/readme/test_ops.png">
-</p>
-<p align="center">
-<img title="Allure Overview Dashboard" src="images/screens/AllureTestOps2.PNG">
 </p>
 
 ## <img src="images/logo/Jira.svg" width="25" height="25"  alt="Allure"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/AUTO-1303">Jira</a>
@@ -97,11 +94,11 @@
 <img title="Allure Overview Dashboard" src="images/screens/JiraTicket.PNG">
 </p>
 
-## <img src="images/logo/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
+## <img src="resources/readme/icons/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
 > После завершения сборки специальный бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с отчетом о прогоне.
 
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screens/bot.PNG" >
+<img title="Allure Overview Dashboard" src="resources/readme/telegram.png" >
 </p>
 
 ## Пример запуска тестов в Selenoid
