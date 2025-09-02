@@ -89,9 +89,9 @@
 <img title="Allure Overview Dashboard" src="resources/readme/test_ops.png">
 </p>
 
-## <img src="images/logo/Jira.svg" width="25" height="25"  alt="Allure"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/AUTO-1303">Jira</a>
+## <img src="resources/readme/icons/Jira.svg" width="25" height="25"  alt="Allure"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/HOMEWORK-1492">Jira</a>
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screens/JiraTicket.PNG">
+<img title="Allure Overview Dashboard" src="resources/readme/JIRA.png">
 </p>
 
 ## <img src="resources/readme/icons/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
