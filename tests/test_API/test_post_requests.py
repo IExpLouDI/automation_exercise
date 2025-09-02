@@ -108,7 +108,7 @@ class TestCreateAccount(BaseTestRequests):
         with step('Создаем аккаунт через API'):
             response_info = api_application.post.create_account(create_user.class_property)
 
-        with step('Проверяем код ответа и сообщение'):
+        with step(f'Проверяем код ответа и сообщение в ответе = {StatusMessage.post_user_created.value}'):
             self.check_response_status_and_message_business_code(response_info, 200, 201)
             assert response_info.get('response').get('message') == StatusMessage.post_user_created.value
 

@@ -12,7 +12,7 @@ from selenium.webdriver.remote.remote_connection import RemoteConnection
 from src.automation_exercise.API.delete_request import delete_account
 from src.automation_exercise.app import UIManager, APIManager
 from src.automation_exercise.data.products import product_men_tshirt, product_women_blue_top
-from src.automation_exercise.utils.attachments import add_video
+from src.automation_exercise.utils.attachments import add_video, add_logs
 from src.automation_exercise.utils.paths import schemas_dir
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User, UserCard
@@ -21,6 +21,7 @@ from src.automation_exercise.API.post_request import post_create_account
 
 @pytest.fixture(autouse=False, scope='function')
 def setup_remote_browser():
+	"""Настройка и создание браузера"""
 	load_dotenv()
 	SELENOID_LOGIN = os.getenv('SELENOID_LOGIN')
 
@@ -58,7 +59,6 @@ def setup_remote_browser():
 	browser.config.base_url = 'https://www.automationexercise.com'
 	browser.open('/')
 	browser.driver.execute_script("$('#fixedban').remove()")
-	# browser.driver.execute_script("$('footer').remove()")
 
 	if browser.element("[aria-label='Consent']").with_().matching(be.present):
 		browser.element("[aria-label='Consent']").click()
@@ -66,29 +66,17 @@ def setup_remote_browser():
 	yield browser
 
 	add_video(browser)
+	add_logs(browser)
 
 	browser.quit()
 
 
 @pytest.fixture()
 def application():
+	"""Доступ к page objects"""
 	app = UIManager()
 	return app
 
-
-@pytest.fixture()
-def setup_browser():
-	browser.config.driver_name = 'firefox'
-	# browser.config.base_url = 'https://www.automationexercise.com'
-	# opt = options.page_load_strategy = "eager"
-	# browser.config.driver_options = opt
-	browser.open('https://www.automationexercise.com')
-
-	yield browser
-
-	browser.quit()
-
-# Алматинская 72а, 18 сентября в 9:00
 
 @pytest.fixture(scope='function')
 def create_user():
@@ -121,6 +109,7 @@ def create_user():
 	)
 
 	user.add_card(user_card)
+
 	with step(f'Подготовлена запись класса user - {user}.\n С картой {user.card}'):
 		return user
 
@@ -128,7 +117,16 @@ def create_user():
 @pytest.fixture(scope='function')
 def create_user_account(create_user):
 	"""Создаёт пользователя и по окончанию теста - удаляет"""
+
+	"""
+	Предварительная попытка удаления пользователя,
+	на случай падения теста с регистрацией
+	"""
+	delete_account(create_user.email, create_user.password)
+
 	yield post_create_account(create_user)
+
+	"""Удаляем после теста"""
 	delete_account(create_user.email, create_user.password)
 
 

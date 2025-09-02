@@ -1,5 +1,3 @@
-import json
-
 import allure
 import requests
 from allure_commons.types import AttachmentType
@@ -48,6 +46,7 @@ class AllureSession(requests.Session):
         self.request_data = {}
         return response
 
+
 def add_video(browser):
     video_url = (
         "https://selenoid.autotests.cloud/video/" + browser.driver.session_id + ".mp4"
@@ -60,3 +59,15 @@ def add_video(browser):
     allure.attach(
         html, 'video_' + browser.driver.session_id, AttachmentType.HTML, '.html'
     )
+
+
+def add_logs(browser):
+    try:
+        log_text = "".join(
+            f'{text}\n'
+            for text in browser.driver.execute('getLog', {'type': 'browser'})['value']
+        )
+    except Exception as error:
+        log_text = f"{error}\nлоги не доступны."
+
+    allure.attach(log_text, 'browser_logs', AttachmentType.TEXT, '.log')
