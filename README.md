@@ -26,7 +26,7 @@
 <a href="https://www.jetbrains.com/pycharm/"><img src="resources/readme/icons/pycharm-icon.svg" width="50" height="50"  alt="IDEA"/></a>
 <a href="https://github.com/"><img src="resources/readme/icons/github-icon.svg" width="50" height="50"  alt="Github"/></a>
 <a href="https://github.com/yashaka/selene"><img src="resources/readme/icons/selene.png" width="50" height="50"  alt="Selene"/></a>
-<a href="https://aerokube.com/selenoid/"><img src="images/logo/Selenoid.svg" width="50" height="50"  alt="Selenoid"/></a>
+<a href="https://aerokube.com/selenoid/"><img src="resources/readme/icons/Selenoid.svg" width="50" height="50"  alt="Selenoid"/></a>
 <a href="https://github.com/allure-framework/allure2"><img src="resources/readme/icons/Allure.svg" width="50" height="50"  alt="Allure"/></a>
 <a href="https://www.jenkins.io/"><img src="resources/readme/icons/Jenkins.svg" width="50" height="50"  alt="Jenkins"/></a>
 <a href="https://qameta.io/"><img src="resources/readme/icons/Allure_TO.svg" width="50" height="50"  alt="Allure TestOps"/></a>  
@@ -39,7 +39,7 @@
 
 #### UI тесты реализованы паттерном PageObject
 >
-> <code>Selenoid</code> выполняет запуск браузеров в контейнерах <code>Docker</code>.
+> <code>Selenoid</code> выполняет запуск браузера в контейнере <code>Docker</code>.
 >
 > <code>Allure Report/Allure TestOps</code> формируют отчеты о запуске тестов.
 >
