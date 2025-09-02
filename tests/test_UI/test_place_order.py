@@ -1,8 +1,17 @@
+import allure
 from allure import step
+from allure_commons.types import Severity
 
 from src.automation_exercise.utils.check_functions import check_account_is_create, check_account_is_deleted
 
 
+@allure.id('01_PLACE_ORDER')
+@allure.tag('UI', 'PLACE_ORDER')
+@allure.severity(Severity.BLOCKER)
+@allure.parent_suite('UI')
+@allure.suite('PLACE_ORDER')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_registration_order_while_checkout(setup_remote_browser, application, products_list, create_user):
     with step(f'Открываем страницу товаров и добавляем в корзину {products_list[0]}'):
         application.navigation_bar.open_products_page()
@@ -63,6 +72,13 @@ def test_registration_order_while_checkout(setup_remote_browser, application, pr
         check_account_is_deleted()
 
 
+@allure.id('02_PLACE_ORDER')
+@allure.tag('UI', 'PLACE_ORDER')
+@allure.severity(Severity.BLOCKER)
+@allure.parent_suite('UI')
+@allure.suite('PLACE_ORDER')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_create_order_after_user_registration(setup_remote_browser, application, products_list, create_user):
 
     with step(f'Выполняем регистрацию пользователя {create_user}'):
@@ -116,6 +132,13 @@ def test_create_order_after_user_registration(setup_remote_browser, application,
         check_account_is_deleted()
 
 
+@allure.id('03_PLACE_ORDER')
+@allure.tag('UI', 'PLACE_ORDER')
+@allure.severity(Severity.BLOCKER)
+@allure.parent_suite('UI')
+@allure.suite('PLACE_ORDER')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_create_order_after_user_login(setup_remote_browser, application, products_list, create_user_account, create_user):
 
     with step(f'Выполняем вход пользователем {create_user}'):

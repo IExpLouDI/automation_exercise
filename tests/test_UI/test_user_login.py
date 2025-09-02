@@ -1,7 +1,15 @@
+import allure
+from allure_commons.types import Severity
 from src.automation_exercise.utils.check_functions import check_website_is_open, check_account_is_deleted
 from allure import step
 
-
+@allure.id('01_USER_LOGIN')
+@allure.tag('UI', 'USER_LOGIN')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('USER_LOGIN')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_user_login_with_correct_email_passw(setup_remote_browser, create_user_account, application):
 	with step('Проверяем что открыта домашняя страница'):
 		check_website_is_open()
@@ -27,6 +35,13 @@ def test_user_login_with_correct_email_passw(setup_remote_browser, create_user_a
 		check_account_is_deleted()
 
 
+@allure.id('02_USER_LOGIN')
+@allure.tag('UI', 'USER_LOGIN')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('USER_LOGIN')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_user_login_with_no_correct_email_passw(setup_remote_browser, application):
 	with step('Проверяем что открыта домашняя страница'):
 		check_website_is_open()
@@ -48,6 +63,13 @@ def test_user_login_with_no_correct_email_passw(setup_remote_browser, applicatio
 		application.signup_login_page.verify_incorrect_email_pass()
 
 
+@allure.id('03_USER_LOGIN')
+@allure.tag('UI', 'USER_LOGIN')
+@allure.severity(Severity.CRITICAL)
+@allure.parent_suite('UI')
+@allure.suite('USER_LOGIN')
+@allure.label('owner', 'vssuchkov')
+@allure.link('https://www.automationexercise.com', name='Testing UI')
 def test_user_logout(setup_remote_browser, create_user_account, application):
 	with step('Переходим в окно авторизации'):
 		application.navigation_bar.open_login_page()
