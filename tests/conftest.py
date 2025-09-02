@@ -1,5 +1,3 @@
-import json
-
 import pytest
 from allure import step
 from selene import browser, be
@@ -19,12 +17,6 @@ from src.automation_exercise.utils.paths import schemas_dir
 from src.automation_exercise.utils.static_values import Country, Months
 from src.automation_exercise.data.user import User, UserCard
 from src.automation_exercise.API.post_request import post_create_account
-
-
-# @pytest.fixture(scope="session", autouse=True)
-# def generate_message():
-#     yield
-#     telebot_send_message()
 
 
 @pytest.fixture(autouse=False, scope='function')
@@ -206,42 +198,3 @@ def product_content():
             "category": "Tops"
         }
     }
-
-
-# def telebot_send_message():
-#     os.system("allure generate allure-results --clean")
-#     bot_token = os.getenv("BOT_TOKEN")
-#     group_id = os.getenv("TELEGRAM_GROUP_ID")
-#     user = os.getenv("USER_NAME")
-#     notifications_path = os.path.dirname(os.path.dirname(__file__))
-#     telegram_dict = {
-#         "base": {
-#             "project": "automation_exercise",
-#             "environment": "grade project",
-#             "comment": user,
-#             "reportLink": "",
-#             "language": "ru",
-#             "allureFolder": "allure-report",
-#             "enableChart": True,
-#         },
-#         "telegram": {"token": bot_token,
-# 					 "chat": group_id,
-# 					 "replyTo": ""},
-#     }
-#
-#     with open(
-#             os.path.join(notifications_path, "notifications", "telegram.json"),
-#             "w",
-#             encoding="utf-8",
-#     ) as file:
-#         file.write(json.dumps(telegram_dict))
-#
-#     os.system(
-#         'java "-DconfigFile=./notifications/telegram.json" -jar ./notifications/allure-notifications-4.11.0.jar'
-#     )
-#     with open(
-#             os.path.join(notifications_path, "notifications", "telegram.json"),
-#             "w",
-#             encoding="utf-8",
-#     ) as file:
-#         print(f"{file} - file clear")
