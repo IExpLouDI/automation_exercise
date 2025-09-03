@@ -101,7 +101,7 @@
 
 ### Тесты 
 <p align="center">
-<img title="Allure Tests" src="resources/readme/tests.png">
+<img title="Allure Tests" src="resources/readme/allure-tests.png">
 </p>
 
 ## <img id="AllureTO-отчет" src="resources/readme/icons/Allure_TO.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://allure.autotests.cloud/launch/48029">Allure TestOps</a>
