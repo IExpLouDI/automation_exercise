@@ -1,4 +1,4 @@
-# Демо проект по автоматизации Automation Exercise
+# Проект по автоматизации Automation Exercise
 <p align="center">
 <img title="Allure Overview Dashboard" src="resources/readme/home_page.png">
 </p>
